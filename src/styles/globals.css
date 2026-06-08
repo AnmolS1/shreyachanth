@@ -279,6 +279,37 @@ html.has-custom-cursor [data-cursor] {
   cursor: none;
 }
 
+/*
+ * .cursor-layer — popover wrapper that hoists the cursor into the browser
+ * top layer. We use popover="manual" so the browser stacks this element above
+ * everything, including <dialog> modals opened with showModal(). UA popover
+ * styles (background, border, overflow, margin) are all reset so the element
+ * is invisible — it's just a coordinate space for the ring/dot children.
+ */
+.cursor-layer {
+  /* Reset all UA popover defaults */
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  /* Must not intercept clicks/hover from real content */
+  pointer-events: none;
+  /* Fallback: stay above normal content if Popover API is unsupported */
+  z-index: 9999;
+  /* Hidden until showPopover() is called; display:none prevents painting */
+  display: none;
+}
+
+/* Popover-open state — browser adds this class when popover is shown */
+.cursor-layer:popover-open {
+  display: block;
+}
+
 .cursor-ring,
 .cursor-dot {
   position: fixed;
@@ -330,6 +361,9 @@ html.has-custom-cursor .cursor-dot {
   position: sticky;
   top: 0;
   z-index: 100;
+  /* needed so the mobile dropdown (position:absolute; top:100%) is contained */
+  /* stylelint-disable-next-line */
+  overflow: visible;
   height: var(--nav-h);
   display: flex;
   align-items: center;
@@ -472,8 +506,6 @@ html.has-custom-cursor .cursor-dot {
   position: relative;
   z-index: 2;
   width: 100%;
-  padding-top: clamp(80px, 14vh, 160px);
-  padding-bottom: clamp(80px, 14vh, 160px);
 }
 
 .hero-eyebrow {
@@ -1119,6 +1151,82 @@ html.has-custom-cursor .cursor-dot {
 }
 
 /* =============================================================================
+   LIGHTBOX — native <dialog> styled to match prototype .lightbox look
+   Uses showModal() for native focus-trap + aria-modal + Escape handling.
+   ============================================================================= */
+dialog.lightbox {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  color: var(--text);
+  /* Browser default dialog centering works perfectly for our needs */
+}
+
+dialog.lightbox::backdrop {
+  background: rgba(6, 6, 8, 0.82);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  animation: viewFade var(--dur-fast) var(--ease) both;
+}
+
+/* Wrapper constrains the media width */
+dialog.lightbox .lightbox-inner {
+  position: relative;
+  width: min(420px, 90vw);
+}
+
+/* Wide videos (landscape/square) get a wider box */
+dialog.lightbox .lightbox-inner.lightbox-wide {
+  width: min(860px, 92vw);
+}
+
+/* 9:16 or 16:9 media area with gold hairline border */
+dialog.lightbox .lightbox-media {
+  position: relative;
+  border: var(--hairline-w) solid var(--gold-line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+/* Caption bar below the media */
+dialog.lightbox .lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+/* Close button — absolutely positioned above the media area */
+dialog.lightbox .lightbox-close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: 0.12em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-transform: uppercase;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+dialog.lightbox .lightbox-close:hover {
+  color: var(--gold);
+}
+
+/* =============================================================================
    SECTION HEADERS (shared)
    ============================================================================= */
 .sec-head {
@@ -1674,6 +1782,119 @@ html.has-custom-cursor .cursor-dot {
 
 .terminal-log .muted {
   color: var(--muted);
+}
+
+/* =============================================================================
+   MOBILE NAV — hamburger + drawer (≤ 640px)
+   The prototype's nav has no mobile menu; this is a beyond-prototype addition.
+   ============================================================================= */
+
+/* Hamburger button — hidden on desktop */
+.nav-hamburger {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  /* Relative so the dropdown can use position:absolute top:100% */
+  .site-header {
+    position: sticky; /* keep sticky but also a containing block */
+    overflow: visible;
+  }
+
+  /* Show the hamburger */
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
+    z-index: 101;
+  }
+
+  .nav-hamburger-bar {
+    display: block;
+    width: 22px;
+    height: var(--hairline-w);
+    background: var(--text);
+    transition: transform var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+    border-radius: 1px;
+  }
+
+  /* Animate bars to × when menu is open */
+  .nav-hamburger[aria-expanded='true'] .nav-hamburger-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+    background: var(--gold);
+  }
+  .nav-hamburger[aria-expanded='true'] .nav-hamburger-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-hamburger[aria-expanded='true'] .nav-hamburger-bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+    background: var(--gold);
+  }
+
+  /* Nav links panel — hidden by default, shown when is-open */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding-inline: var(--gut);
+    padding-block: 8px;
+    background: rgba(11, 11, 13, 0.96);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: var(--hairline-w) solid var(--hairline);
+    z-index: 99;
+  }
+
+  .nav-links.is-open {
+    display: flex;
+  }
+
+  /* Nav link rows — larger tap targets */
+  .nav-link {
+    padding-block: 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    border-bottom: var(--hairline-w) solid var(--hairline-2);
+  }
+
+  .nav-link:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* ── Spec-row — stack on very narrow screens ──────────────────────────────── */
+@media (max-width: 440px) {
+  .spec-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding-block: 14px;
+  }
+
+  .spec-row .n {
+    display: none; /* hide the right-col note; shows cleanly */
+  }
+}
+
+/* ── Reduced-motion: no slide animation on mobile drawer ─────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .nav-hamburger-bar {
+    transition: none !important;
+  }
 }
 
 /* field error message */

@@ -1,10 +1,14 @@
+import { useRef, useState, useCallback, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import { seo } from '../content/seo'
+import { useReveal } from '../hooks/useReveal'
+import type { VideoItem } from '../content/video'
 
-// Wave 2 components — filled in by T11 subagent
+// Wave 2 components
 import RateCard from '../components/RateCard'
 import TrustedBy from '../components/TrustedBy'
+import VideoLightbox from '../components/VideoLightbox'
 import { rates } from '../content/rates'
 import { workSamples } from '../content/video'
 
@@ -14,30 +18,102 @@ const pageVariants = {
   exit: { opacity: 0 },
 }
 
-/** Sample tile — semantic button matching bento tile structure */
+/**
+ * SampleTile — shows a real poster image + hover-preview video (matching
+ * BentoTile on Home). Clicking opens the shared VideoLightbox.
+ */
 function SampleTile({
-  label,
-  px,
-  py,
+  video,
+  onOpen,
 }: {
-  label: string
-  px: number
-  py: number
+  video: VideoItem
+  onOpen: (video: VideoItem, trigger: HTMLButtonElement) => void
 }) {
+  const triggerRef = useRef<HTMLButtonElement>(null!)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [loaded, setLoaded] = useState(false)
+  const [playing, setPlaying] = useState(false)
+
+  // Lazy-load the video src once the tile enters the viewport
+  useEffect(() => {
+    const el = triggerRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !loaded) {
+          setLoaded(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '200px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [loaded])
+
+  const play = useCallback(() => {
+    const vid = videoRef.current
+    if (vid) {
+      vid.play().catch(() => { /* autoplay blocked — ignore */ })
+      setPlaying(true)
+    }
+  }, [])
+
+  const pause = useCallback(() => {
+    const vid = videoRef.current
+    if (vid) {
+      vid.pause()
+      vid.currentTime = 0
+      setPlaying(false)
+    }
+  }, [])
+
+  const handleClick = useCallback(() => {
+    pause()
+    onOpen(video, triggerRef.current)
+  }, [video, onOpen, pause])
+
   return (
     <button
-      className="tile v"
-      aria-label={`Play: ${label}`}
+      ref={triggerRef}
+      className={`tile tile--sample${playing ? ' is-playing' : ''}`}
+      aria-label={`Play: ${video.title}`}
       aria-haspopup="dialog"
       type="button"
+      onClick={handleClick}
+      onMouseEnter={play}
+      onMouseLeave={pause}
+      onFocus={play}
+      onBlur={pause}
     >
       <div className="poster">
-        <div
-          className="ph"
-          style={{ '--px': `${px}%`, '--py': `${py}%` } as React.CSSProperties}
-        />
+        {/* Always render the poster img; swap to looping video preview once loaded */}
+        {loaded && (video.mp4 || video.webm) ? (
+          <video
+            ref={videoRef}
+            muted
+            playsInline
+            loop
+            preload="none"
+            poster={video.poster}
+            aria-hidden="true"
+            tabIndex={-1}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          >
+            {video.webm && <source src={video.webm} type="video/webm" />}
+            {video.mp4 && <source src={video.mp4} type="video/mp4" />}
+          </video>
+        ) : (
+          <img
+            src={video.poster}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        )}
       </div>
-      <span className="mono mono--sm tlabel">{label}</span>
+      <span className="mono mono--sm tlabel">{video.title}</span>
       <span className="play" aria-hidden="true">
         <span className="tri" />
         preview
@@ -49,9 +125,24 @@ function SampleTile({
 
 export default function Work() {
   const title = `Work with me — ${seo.siteName}`
+  const rootRef = useRef<HTMLDivElement>(null)
+  useReveal(rootRef)
+
+  const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null)
+  const activeTriggerRef = useRef<HTMLButtonElement | null>(null)
+
+  const handleOpen = useCallback((video: VideoItem, trigger: HTMLButtonElement) => {
+    activeTriggerRef.current = trigger
+    setActiveVideo(video)
+  }, [])
+
+  const handleClose = useCallback(() => {
+    setActiveVideo(null)
+  }, [])
 
   return (
     <motion.div
+      ref={rootRef}
       variants={pageVariants}
       initial="initial"
       animate="animate"
@@ -126,7 +217,7 @@ export default function Work() {
               </div>
               <div className="samples">
                 {workSamples.fitness.map((v) => (
-                  <SampleTile key={v.id} label={v.title} px={v.px} py={v.py} />
+                  <SampleTile key={v.id} video={v} onOpen={handleOpen} />
                 ))}
               </div>
             </div>
@@ -159,7 +250,7 @@ export default function Work() {
               </div>
               <div className="samples">
                 {workSamples.diet.map((v) => (
-                  <SampleTile key={v.id} label={v.title} px={v.px} py={v.py} />
+                  <SampleTile key={v.id} video={v} onOpen={handleOpen} />
                 ))}
               </div>
             </div>
@@ -192,7 +283,7 @@ export default function Work() {
               </div>
               <div className="samples">
                 {workSamples.storytelling.map((v) => (
-                  <SampleTile key={v.id} label={v.title} px={v.px} py={v.py} />
+                  <SampleTile key={v.id} video={v} onOpen={handleOpen} />
                 ))}
               </div>
             </div>
@@ -205,6 +296,15 @@ export default function Work() {
           <TrustedBy variant="work" />
         </section>
       </div>
+
+      {/* Shared lightbox — renders above all content when a sample is clicked */}
+      {activeVideo && (
+        <VideoLightbox
+          video={activeVideo}
+          onClose={handleClose}
+          returnFocusRef={activeTriggerRef}
+        />
+      )}
     </motion.div>
   )
 }

@@ -4,10 +4,19 @@
  * Wraps HeroField in ErrorBoundary + Suspense; falls back to HeroStaticFallback
  * on WebGL failure or under prefers-reduced-motion.
  *
- * The HeroField canvas is absolutely positioned behind the hero text layer.
- * T07 stub — particle field logic lives in src/three/HeroField.tsx.
+ * HTML structure mirrors prototype/index.html lines 59–99 exactly:
+ *   .hero
+ *     .hero-canvas-wrap (absolutely filled background)
+ *     .container
+ *       .hero-eyebrow > span.tick + span.mono.mono--sm
+ *       h1.hero-title > em (gilded gradient)
+ *       p.hero-sub
+ *       .hero-actions > btn--gold + btn--ghost
+ *       .stat-line > .stat × 3
+ *     .scroll-cue > span.bar + span.mono.mono--sm
  */
 import { forwardRef, lazy, Suspense } from 'react'
+import { Link } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary'
 import HeroStaticFallback from './HeroStaticFallback'
 import { about } from '../content/about'
@@ -35,10 +44,10 @@ function StatItem({
     <div className="stat">
       {/* aria-label on outer span = final value for screen readers */}
       <span className="num" aria-label={finalStr}>
-        {/* aria-hidden on inner = visual count-up animation */}
+        {/* aria-hidden on inner = visual count-up animation only */}
         <span aria-hidden="true">
           {displayValue}
-          {unit}
+          {unit && <span className="suffix">{unit}</span>}
         </span>
       </span>
       <span className="lbl">{label}</span>
@@ -49,8 +58,8 @@ function StatItem({
 const Hero = forwardRef<HTMLElement>(function Hero(_, ref) {
   return (
     <section ref={ref} className="hero" aria-labelledby="hero-heading">
-      {/* ── Canvas layer ─────────────────────────────────────────────────── */}
-      <div className="hero-canvas" aria-hidden="true">
+      {/* ── Canvas / particle field ──────────────────────────────────────── */}
+      <div className="hero-canvas-wrap" aria-hidden="true">
         {prefersReduced ? (
           <HeroStaticFallback />
         ) : (
@@ -62,61 +71,63 @@ const Hero = forwardRef<HTMLElement>(function Hero(_, ref) {
         )}
       </div>
 
-      {/* ── Hero text layer ──────────────────────────────────────────────── */}
-      <div className="hero-inner container">
-        <div className="hero-content">
-          <div className="eyebrow mono mono--sm">
-            <span className="dot" />
-            {about.eyebrow}
-          </div>
+      {/* ── Hero content ─────────────────────────────────────────────────── */}
+      <div className="container">
+        {/* Eyebrow: gold tick + mono label */}
+        <div className="hero-eyebrow">
+          <span className="tick" aria-hidden="true" />
+          <span className="mono mono--sm">{about.eyebrow}</span>
+        </div>
 
-          <h1 id="hero-heading" data-view-heading tabIndex={-1}>
-            {about.heroLine1}
-            <br />
-            <em
-              style={{
-                fontStyle: 'normal',
-                color: 'var(--gold)',
-                WebkitTextFillColor: 'transparent',
-                background: 'var(--gold-sheen)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-              }}
+        {/* Display headline — second line gilded */}
+        <h1 className="hero-title" id="hero-heading" data-view-heading tabIndex={-1}>
+          {about.heroLine1}
+          <br />
+          <em
+            style={{
+              fontStyle: 'normal',
+              color: 'var(--gold)',
+              WebkitTextFillColor: 'transparent',
+              background: 'var(--gold-sheen)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+            }}
+          >
+            {about.heroLine2}
+          </em>
+        </h1>
+
+        {/* Subtitle */}
+        <p className="hero-sub">{about.heroSub}</p>
+
+        {/* CTA buttons */}
+        <div className="hero-actions">
+          <Link to="/work" className="btn btn--gold" data-cursor>
+            {about.heroCta1} <span className="arr">→</span>
+          </Link>
+          <Link to="/contact" className="btn btn--ghost" data-cursor>
+            {about.heroCta2}
+          </Link>
+        </div>
+
+        {/* Mono stat line */}
+        <div className="stat-line">
+          {about.stats.map((s, i) => (
+            <div
+              key={s.label}
+              className="reveal"
+              style={{ '--i': i } as React.CSSProperties}
             >
-              {about.heroLine2}
-            </em>
-          </h1>
-
-          <p className="sub">{about.heroSub}</p>
-
-          <div className="hero-cta">
-            <a href="/work" className="btn btn--gold">
-              {about.heroCta1} <span className="arr">→</span>
-            </a>
-            <a href="/contact" className="btn btn--ghost">
-              {about.heroCta2}
-            </a>
-          </div>
-
-          {/* ── Stats row ─────────────────────────────────────────────── */}
-          <div className="stats" role="list">
-            {about.stats.map((s) => (
-              <div key={s.label} role="listitem">
-                <StatItem
-                  label={s.label}
-                  value={s.value}
-                  unit={s.unit ?? ''}
-                />
-              </div>
-            ))}
-          </div>
+              <StatItem label={s.label} value={s.value} unit={s.unit ?? ''} />
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* ── Scroll indicator ────────────────────────────────────────────── */}
-      <div className="hero-scroll" aria-hidden="true">
+      {/* ── Animated scroll cue (bottom-left) ───────────────────────────── */}
+      <div className="scroll-cue" aria-hidden="true">
+        <span className="bar" />
         <span className="mono mono--sm">Scroll</span>
-        <span className="line" />
       </div>
     </section>
   )

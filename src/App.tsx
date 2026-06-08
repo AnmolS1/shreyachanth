@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import Cursor from './components/Cursor'
 import ErrorBoundary from './components/ErrorBoundary'
 import Home from './routes/Home'
 import Work from './routes/Work'
@@ -42,6 +43,9 @@ function AppShell() {
 
   return (
     <>
+      {/* Custom gold cursor — disabled on touch / reduced-motion */}
+      <Cursor />
+
       {/* Skip navigation — WCAG 2.4.1 Level A, must be first DOM element */}
       <a
         href="#main-content"

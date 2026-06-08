@@ -47,17 +47,17 @@ export const about: About = AboutSchema.parse({
   portraitAlt: 'Portrait of Shreya Chanth',
 
   // ── Hero ──────────────────────────────────────────────────────────────────
-  eyebrow: 'Fitness coach · Content creator · [PLACEHOLDER: Location]',
-  heroLine1: 'A systems mind,',
-  heroLine2: 'applied to the body.',
+  eyebrow: 'Coach · Creator · Est. 2025',
+  heroLine1: 'Built from zero.',
+  heroLine2: 'Tuned for momentum.',
   heroSub:
-    'Strength coaching, nutrition systems, and narrative-led content — three disciplines, one framework. [PLACEHOLDER: positioning copy]',
+    'Coaching, programming, and content — engineered with the discipline of a system, not the noise of a feed.',
   heroCta1: 'Work with me',
   heroCta2: 'Get in touch',
 
   // ── Dossier ───────────────────────────────────────────────────────────────
   tagline: 'A systems mind, applied to the body.',
-  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. [PLACEHOLDER: bio paragraph — replace with real text. Keep the tone disciplined and quiet.]',
+  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder bio copy — replace with real text. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Built deliberately, refined continuously. Ut enim ad minim veniam, quis nostrud exercitation.',
   specs: [
     { label: 'Based in',        value: '[PLACEHOLDER: City · Country]' },
     { label: 'Focus',           value: 'Strength · Conditioning · Story', note: '03' },

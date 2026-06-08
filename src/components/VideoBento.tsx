@@ -15,12 +15,12 @@ import {
   useState,
   useCallback,
   useEffect,
-  useId,
 } from 'react'
 import { useLocation } from 'react-router-dom'
 import type { VideoItem } from '../content/video'
 import { videos } from '../content/video'
 import { useReveal } from '../hooks/useReveal'
+import VideoLightbox from './VideoLightbox'
 
 // ── Lazy video tile ────────────────────────────────────────────────────────────
 function BentoTile({
@@ -153,154 +153,6 @@ function BentoTile({
       </span>
       <span className="scrub" aria-hidden="true" />
     </button>
-  )
-}
-
-// ── Lightbox ──────────────────────────────────────────────────────────────────
-function VideoLightbox({
-  video,
-  onClose,
-  returnFocusRef,
-}: {
-  video: VideoItem
-  onClose: () => void
-  returnFocusRef: React.RefObject<HTMLButtonElement | null>
-}) {
-  const dialogRef = useRef<HTMLDialogElement | null>(null)
-  const videoRef = useRef<HTMLVideoElement | null>(null)
-  const titleId = useId()
-
-  // Open on mount — showModal() for native focus trap + aria-modal
-  const attachDialog = useCallback((el: HTMLDialogElement | null) => {
-    dialogRef.current = el
-    if (el && !el.open) el.showModal()
-  }, [])
-
-  const close = useCallback(() => {
-    // Pause embedded video before closing
-    const vid = videoRef.current
-    if (vid) { vid.pause(); vid.currentTime = 0 }
-    const iframe = dialogRef.current?.querySelector('iframe')
-    if (iframe) { iframe.src = iframe.src } // reset Stream iframe (stop playback)
-    dialogRef.current?.close()
-    onClose()
-    // Return focus to the tile button that triggered this
-    returnFocusRef.current?.focus()
-  }, [onClose, returnFocusRef])
-
-  // Sync close state when user presses Escape (native dialog behavior)
-  const handleNativeClose = useCallback(() => {
-    const vid = videoRef.current
-    if (vid) { vid.pause(); vid.currentTime = 0 }
-    onClose()
-    returnFocusRef.current?.focus()
-  }, [onClose, returnFocusRef])
-
-  // Aspect ratio — use video's native dimensions if known, else 16:9 default
-  const isPortrait =
-    video.variant === 'v' || video.variant === 'v-tall'
-  const aspectRatio = isPortrait ? '9 / 16' : '16 / 9'
-
-  return (
-    <dialog
-      ref={attachDialog}
-      aria-labelledby={titleId}
-      onClose={handleNativeClose}
-      style={{
-        background: 'var(--surface)',
-        border: '1px solid var(--hairline)',
-        borderRadius: '12px',
-        padding: 0,
-        maxWidth: isPortrait
-          ? 'min(480px, 90vw)'
-          : 'min(90vw, 1200px)',
-        width: '100%',
-        color: 'var(--text)',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Close button — 44×44 touch target */}
-      <button
-        onClick={close}
-        aria-label="Close video"
-        style={{
-          position: 'absolute',
-          top: 12,
-          right: 12,
-          background: 'rgba(11,11,13,0.72)',
-          border: '1px solid var(--hairline)',
-          borderRadius: 8,
-          color: 'var(--muted)',
-          fontSize: '1.25rem',
-          cursor: 'pointer',
-          zIndex: 10,
-          lineHeight: 1,
-          width: 44,
-          height: 44,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        ×
-      </button>
-
-      {/* Video area */}
-      <div style={{ aspectRatio, background: 'var(--ink)' }}>
-        {video.streamId ? (
-          // Long-form: Cloudflare Stream sandboxed iframe
-          <iframe
-            src={`https://customer-placeholder.cloudflarestream.com/${video.streamId}/iframe`}
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-            sandbox="allow-scripts allow-same-origin"
-            loading="lazy"
-            title={video.title}
-            style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
-          />
-        ) : video.mp4 || video.webm ? (
-          // Short-form: R2 / local video
-          <video
-            ref={videoRef}
-            autoPlay
-            controls
-            playsInline
-            loop={false}
-            poster={video.poster}
-            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-          >
-            {video.webm && <source src={video.webm} type="video/webm" />}
-            {video.mp4 && <source src={video.mp4} type="video/mp4" />}
-          </video>
-        ) : (
-          // Poster-only fallback
-          <img
-            src={video.poster}
-            alt={video.title}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          />
-        )}
-      </div>
-
-      {/* Title bar */}
-      <div
-        style={{
-          padding: '14px 20px',
-          borderTop: '1px solid var(--hairline)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 16,
-        }}
-      >
-        <span id={titleId} className="mono mono--sm" style={{ color: 'var(--muted)' }}>
-          {video.title}
-        </span>
-        {video.duration && (
-          <span className="mono mono--sm" style={{ color: 'var(--faint)' }}>
-            {video.duration}
-          </span>
-        )}
-      </div>
-    </dialog>
   )
 }
 

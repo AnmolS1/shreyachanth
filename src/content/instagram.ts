@@ -27,8 +27,8 @@ export type IgPost = z.infer<typeof IgPostSchema>
 export type InstagramConfig = z.infer<typeof InstagramConfigSchema>
 
 export const instagram: InstagramConfig = InstagramConfigSchema.parse({
-  mode: 'curated', // switch to 'behold' once BEHOLD_FEED_ID is configured
-  instagramHandle: '@placeholder', // [PLACEHOLDER: real IG handle]
+  mode: 'behold', // falls back to curatedPosts below if /feed is unavailable
+  instagramHandle: '@shrookya',
   curatedPosts: [
     { id: 'post-01', caption: 'post 01', permalink: 'https://instagram.com/', px: 30, py: 30 },
     { id: 'post-02', caption: 'post 02', permalink: 'https://instagram.com/', px: 58, py: 40 },
