@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Shreya Chanth — Coach &amp; creator</title>
+	<meta name="description" content="Shreya Chanth — fitness coach and content creator. Portfolio." />
+
+	<!-- Fonts: Inter (tight grotesk) + JetBrains Mono (instrument numerals).
+     Loaded from the standard font CDN; JS libs are cdnjs-only (see foot of file). -->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+		rel="stylesheet" />
+
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+
+	<!-- splash/no-JS thumbnail for the offline bundle -->
+	<template id="__bundler_thumbnail">
+		<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shreya Chanth">
+			<rect width="100" height="100" fill="#0B0B0D" />
+			<rect x="30" y="30" width="40" height="40" fill="none" stroke="#C9A24B" stroke-width="0.6" />
+			<text x="50" y="50" dominant-baseline="central" text-anchor="middle" fill="#C9A24B"
+				font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="1">SC</text>
+		</svg>
+	</template>
+
+	<!-- custom cursor (disabled on touch + reduced-motion in JS) -->
+	<div class="cursor-ring" aria-hidden="true"></div>
+	<div class="cursor-dot" aria-hidden="true"></div>
+
+	<a class="skip-link mono" href="#main"
+		style="position:absolute;left:-9999px;top:8px;z-index:9999;background:var(--surface);padding:10px 16px;border:var(--hairline-w) solid var(--gold-line);border-radius:2px;"
+		onfocus="this.style.left='12px'" onblur="this.style.left='-9999px'">Skip to content</a>
+
+	<!-- ============================ SHARED HEADER ============================ -->
+	<header class="site-header">
+		<nav class="nav" aria-label="Primary">
+			<a class="wordmark" href="#/" aria-label="Shreya Chanth — home">Shreya<span class="sep">·</span>Chanth</a>
+			<div class="nav-links">
+				<a class="nav-link" href="#/" data-nav="home">Home</a>
+				<a class="nav-link" href="#/work" data-nav="work">Work with me</a>
+				<a class="nav-link" href="#/contact" data-nav="contact">Contact</a>
+			</div>
+		</nav>
+	</header>
+
+	<main id="main" class="shell">
+
+		<!-- ============================ HOME VIEW ============================ -->
+		<section id="view-home" class="view" data-screen-label="Home">
+
+			<!-- ---------- HERO ---------- -->
+			<section class="hero" aria-labelledby="hero-title">
+				<canvas id="hero-canvas" aria-hidden="true"></canvas>
+				<div class="container">
+					<div class="hero-eyebrow">
+						<span class="tick"></span>
+						<span class="mono mono--sm">Coach · Creator · Est. 2025</span>
+					</div>
+					<h1 class="hero-title" id="hero-title" data-view-heading>Built from zero.<br />Tuned for
+						<em>momentum.</em></h1>
+					<p class="hero-sub">Coaching, programming, and content — engineered with the discipline of a system,
+						not the noise of a feed. <span style="color:var(--faint)">[Placeholder subhead — replace with
+							real positioning copy.]</span></p>
+
+					<div class="hero-actions">
+						<a class="btn btn--gold" href="#/work" data-cursor>Work with me <span class="arr">→</span></a>
+						<a class="btn btn--ghost" href="#reel-index" data-scroll-to="reel-index" data-cursor>Watch
+							reels</a>
+					</div>
+
+					<!-- mono stat line — count-up motif reinforces the instrument theme -->
+					<div class="stat-line">
+						<div class="stat reveal" style="--i:0" data-count="1200">
+							<span class="num"><span data-count-val>0</span><span class="suffix">+</span></span>
+							<span class="lbl">Sessions logged</span>
+						</div>
+						<div class="stat reveal" style="--i:1" data-count="16">
+							<span class="num"><span data-count-val>0</span></span>
+							<span class="lbl">Programs built</span>
+						</div>
+						<div class="stat reveal" style="--i:2" data-count="400">
+							<span class="num"><span data-count-val>0</span></span>
+							<span class="lbl">Days in motion</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="scroll-cue" aria-hidden="true">
+					<span class="bar"></span>
+					<span class="mono mono--sm">Scroll</span>
+				</div>
+			</section>
+
+			<!-- ---------- ABOUT (dossier / readout) ---------- -->
+			<section class="section" aria-labelledby="about-title">
+				<div class="container">
+					<div class="section-index reveal">
+						<span class="dot"></span>
+						<span class="mono mono--sm">01 / 04 — About</span>
+					</div>
+
+					<div class="about-grid">
+						<!-- portrait framed by hairline measurement ticks -->
+						<div class="portrait-frame reveal">
+							<span class="bracket tl"></span><span class="bracket tr"></span>
+							<span class="bracket bl"></span><span class="bracket br"></span>
+							<span class="ruler"></span>
+							<div class="portrait ph-static" role="img" aria-label="Portrait placeholder">
+								<div class="ph" style="--px:38%;--py:30%"></div>
+								<span class="mono mono--sm meta">fig.01 — portrait</span>
+							</div>
+						</div>
+
+						<div class="about-body">
+							<h2 class="sec-title about-lead reveal" id="about-title" style="--i:0">A systems mind,
+								applied to the body.</h2>
+							<p class="about-copy reveal" style="--i:1">Lorem ipsum dolor sit amet, consectetur
+								adipiscing elit. Placeholder bio copy — replace with real text. Sed do eiusmod tempor
+								incididunt ut labore et dolore magna aliqua. Built deliberately, refined continuously.
+							</p>
+							<p class="about-copy reveal" style="--i:2">Ut enim ad minim veniam, quis nostrud
+								exercitation. Placeholder paragraph two — keep the tone disciplined and quiet. Duis aute
+								irure dolor in reprehenderit in voluptate.</p>
+
+							<!-- spec readout -->
+							<div class="spec-list reveal" style="--i:3">
+								<div class="spec-row">
+									<span class="k">Based in</span>
+									<span class="v">[City] · [Country]</span>
+									<span class="n">—</span>
+								</div>
+								<div class="spec-row">
+									<span class="k">Focus</span>
+									<span class="v">Strength · Conditioning · Story</span>
+									<span class="n">03</span>
+								</div>
+								<div class="spec-row">
+									<span class="k">Coaching since</span>
+									<span class="v">Building, one rep at a time</span>
+									<span class="n">2025</span>
+								</div>
+								<div class="spec-row" data-count="80">
+									<span class="k">Athletes coached</span>
+									<span class="v">Placeholder figure</span>
+									<span class="n"><span data-count-val>0</span>+</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ---------- VIDEO BENTO ---------- -->
+			<section class="section section--tight" id="reel-index" aria-labelledby="reel-title">
+				<div class="container">
+					<div class="sec-head">
+						<div>
+							<div class="section-index reveal">
+								<span class="dot"></span>
+								<span class="mono mono--sm">02 / 04 — Reel index</span>
+							</div>
+							<h2 class="sec-title reveal" id="reel-title">Selected work, by the clip.</h2>
+						</div>
+						<p class="sec-note reveal">Sixteen pieces, native ratios preserved. Hover to preview; click to
+							expand. <span style="color:var(--faint)">[All posters &amp; sources placeholder.]</span></p>
+					</div>
+
+					<!-- tiles are role=button + tabindex for keyboard; JS wires the lightbox.
+             React build: swap each .ph poster for a muted/looped/playsinline <video>. -->
+					<div class="bento reveal">
+						<article class="tile big" tabindex="0" role="button" data-idx="01"
+							data-label="Reel 01 — feature" aria-label="Open reel 01">
+							<div class="poster">
+								<div class="ph" style="--px:30%;--py:24%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 01</span><span class="dur">0:38</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile v" tabindex="0" role="button" data-idx="02" data-label="Reel 02"
+							aria-label="Open reel 02">
+							<div class="poster">
+								<div class="ph" style="--px:60%;--py:40%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 02</span><span class="dur">0:14</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile v" tabindex="0" role="button" data-idx="03" data-label="Reel 03"
+							aria-label="Open reel 03">
+							<div class="poster">
+								<div class="ph" style="--px:42%;--py:66%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 03</span><span class="dur">0:22</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile sq" tabindex="0" role="button" data-idx="04" data-label="Reel 04"
+							aria-label="Open reel 04">
+							<div class="poster">
+								<div class="ph" style="--px:24%;--py:50%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 04</span><span class="dur">0:09</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile wide" tabindex="0" role="button" data-idx="05"
+							data-label="Reel 05 — landscape" aria-label="Open reel 05">
+							<div class="poster">
+								<div class="ph" style="--px:70%;--py:30%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 05</span><span class="dur">1:04</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile v" tabindex="0" role="button" data-idx="06" data-label="Reel 06"
+							aria-label="Open reel 06">
+							<div class="poster">
+								<div class="ph" style="--px:50%;--py:20%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 06</span><span class="dur">0:17</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile v-tall" tabindex="0" role="button" data-idx="07" data-label="Reel 07"
+							aria-label="Open reel 07">
+							<div class="poster">
+								<div class="ph" style="--px:34%;--py:44%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 07</span><span class="dur">0:28</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile sq" tabindex="0" role="button" data-idx="08" data-label="Reel 08"
+							aria-label="Open reel 08">
+							<div class="poster">
+								<div class="ph" style="--px:64%;--py:62%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 08</span><span class="dur">0:11</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile v" tabindex="0" role="button" data-idx="09" data-label="Reel 09"
+							aria-label="Open reel 09">
+							<div class="poster">
+								<div class="ph" style="--px:46%;--py:36%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 09</span><span class="dur">0:19</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile wide" tabindex="0" role="button" data-idx="10"
+							data-label="Reel 10 — landscape" aria-label="Open reel 10">
+							<div class="poster">
+								<div class="ph" style="--px:28%;--py:58%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 10</span><span class="dur">0:52</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile v" tabindex="0" role="button" data-idx="11" data-label="Reel 11"
+							aria-label="Open reel 11">
+							<div class="poster">
+								<div class="ph" style="--px:56%;--py:48%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 11</span><span class="dur">0:24</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile sq" tabindex="0" role="button" data-idx="12" data-label="Reel 12"
+							aria-label="Open reel 12">
+							<div class="poster">
+								<div class="ph" style="--px:38%;--py:28%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 12</span><span class="dur">0:08</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile v-tall" tabindex="0" role="button" data-idx="13" data-label="Reel 13"
+							aria-label="Open reel 13">
+							<div class="poster">
+								<div class="ph" style="--px:66%;--py:34%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 13</span><span class="dur">0:31</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile v" tabindex="0" role="button" data-idx="14" data-label="Reel 14"
+							aria-label="Open reel 14">
+							<div class="poster">
+								<div class="ph" style="--px:44%;--py:54%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 14</span><span class="dur">0:16</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile wide" tabindex="0" role="button" data-idx="15"
+							data-label="Reel 15 — landscape" aria-label="Open reel 15">
+							<div class="poster">
+								<div class="ph" style="--px:32%;--py:40%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 15</span><span class="dur">0:47</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+						<article class="tile v" tabindex="0" role="button" data-idx="16" data-label="Reel 16"
+							aria-label="Open reel 16">
+							<div class="poster">
+								<div class="ph" style="--px:52%;--py:64%"></div>
+							</div>
+							<span class="mono mono--sm tlabel">reel 16</span><span class="dur">0:20</span>
+							<span class="play"><span class="tri"></span>preview</span><span class="scrub"></span>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- ---------- INSTAGRAM ---------- -->
+			<section class="section section--tight" aria-labelledby="ig-title">
+				<div class="container">
+					<div class="ig-head">
+						<div>
+							<div class="section-index reveal">
+								<span class="dot"></span>
+								<span class="mono mono--sm">03 / 04 — Instagram</span>
+							</div>
+							<h2 class="sec-title reveal" id="ig-title">From the feed.</h2>
+						</div>
+						<a class="btn btn--ghost reveal" href="https://instagram.com/" target="_blank" rel="noopener"
+							data-cursor>@placeholder <span class="arr">↗</span></a>
+					</div>
+				</div>
+
+				<!-- scroll-snapping rail; reacts subtly to cursor. Behold seam: see IG_CONFIG in app.js -->
+				<div class="container">
+					<div class="ig-rail" role="list" aria-label="Instagram posts (placeholder)">
+						<a class="ig-card" role="listitem" href="https://instagram.com/" target="_blank" rel="noopener"
+							data-cursor>
+							<div class="ph" style="--px:30%;--py:30%"></div>
+							<div class="ig-hover"><span class="glyph">View on IG ↗</span></div>
+							<div class="ig-meta"><span class="ig-tag">post 01</span></div>
+						</a>
+						<a class="ig-card" role="listitem" href="https://instagram.com/" target="_blank" rel="noopener"
+							data-cursor>
+							<div class="ph" style="--px:58%;--py:40%"></div>
+							<div class="ig-hover"><span class="glyph">View on IG ↗</span></div>
+							<div class="ig-meta"><span class="ig-tag">post 02</span></div>
+						</a>
+						<a class="ig-card" role="listitem" href="https://instagram.com/" target="_blank" rel="noopener"
+							data-cursor>
+							<div class="ph" style="--px:44%;--py:62%"></div>
+							<div class="ig-hover"><span class="glyph">View on IG ↗</span></div>
+							<div class="ig-meta"><span class="ig-tag">post 03</span></div>
+						</a>
+						<a class="ig-card" role="listitem" href="https://instagram.com/" target="_blank" rel="noopener"
+							data-cursor>
+							<div class="ph" style="--px:66%;--py:28%"></div>
+							<div class="ig-hover"><span class="glyph">View on IG ↗</span></div>
+							<div class="ig-meta"><span class="ig-tag">post 04</span></div>
+						</a>
+						<a class="ig-card" role="listitem" href="https://instagram.com/" target="_blank" rel="noopener"
+							data-cursor>
+							<div class="ph" style="--px:36%;--py:48%"></div>
+							<div class="ig-hover"><span class="glyph">View on IG ↗</span></div>
+							<div class="ig-meta"><span class="ig-tag">post 05</span></div>
+						</a>
+						<a class="ig-card" role="listitem" href="https://instagram.com/" target="_blank" rel="noopener"
+							data-cursor>
+							<div class="ph" style="--px:52%;--py:36%"></div>
+							<div class="ig-hover"><span class="glyph">View on IG ↗</span></div>
+							<div class="ig-meta"><span class="ig-tag">post 06</span></div>
+						</a>
+						<a class="ig-card" role="listitem" href="https://instagram.com/" target="_blank" rel="noopener"
+							data-cursor>
+							<div class="ph" style="--px:48%;--py:58%"></div>
+							<div class="ig-hover"><span class="glyph">View on IG ↗</span></div>
+							<div class="ig-meta"><span class="ig-tag">post 07</span></div>
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- ---------- TRUSTED BY (teaser) ---------- -->
+			<section class="section section--tight" aria-labelledby="trust-title">
+				<div class="container">
+					<div class="sec-head">
+						<div>
+							<div class="section-index reveal">
+								<span class="dot"></span>
+								<span class="mono mono--sm">04 / 04 — Trusted by</span>
+							</div>
+							<h2 class="sec-title reveal" id="trust-title">Logos, as data points.</h2>
+						</div>
+						<p class="sec-note reveal">A teaser strip — the full roster lives under Work with me. <span
+								style="color:var(--faint)">[Placeholder partners; hover to gild.]</span></p>
+					</div>
+
+					<div class="logos reveal">
+						<div class="logo-cell" data-cursor><span class="logo-mark">LUMA</span><span class="logo-idx">↗
+								01</span></div>
+						<div class="logo-cell" data-cursor><span class="logo-mark">FORGE</span><span class="logo-idx">↗
+								02</span></div>
+						<div class="logo-cell" data-cursor><span class="logo-mark">MERIDIAN</span><span
+								class="logo-idx">↗ 03</span></div>
+						<div class="logo-cell" data-cursor><span class="logo-mark">ATLAS</span><span class="logo-idx">↗
+								04</span></div>
+						<div class="logo-cell" data-cursor><span class="logo-mark">NORDA</span><span class="logo-idx">↗
+								05</span></div>
+						<div class="logo-cell" data-cursor><span class="logo-mark">KILN</span><span class="logo-idx">↗
+								06</span></div>
+					</div>
+				</div>
+			</section>
+		</section>
+
+		<!-- ============================ WORK VIEW ============================ -->
+		<section id="view-work" class="view" data-screen-label="Work with me">
+
+			<!-- page intro -->
+			<section class="container work-intro">
+				<div class="section-index reveal">
+					<span class="dot"></span>
+					<span class="mono mono--sm">Services — three pillars, one system</span>
+				</div>
+				<h1 data-view-heading>Work with <em>me.</em></h1>
+				<p class="lead reveal">Coaching, nutrition, and content — each a discipline of its own, each with sample
+					work and a spec-sheet rate card. <span style="color:var(--faint)">[Placeholder positioning
+						copy.]</span></p>
+			</section>
+
+			<!-- sticky pillar sub-nav (JS-scrolled, never touches the route hash) -->
+			<div class="container">
+				<nav class="pillar-nav" aria-label="Service pillars">
+					<span class="pn-label">Pillars</span>
+					<a href="#fitness" data-scroll-to="fitness" class="is-active"><span class="n">01</span> Fitness</a>
+					<a href="#diet" data-scroll-to="diet"><span class="n">02</span> Diet</a>
+					<a href="#storytelling" data-scroll-to="storytelling"><span class="n">03</span> Storytelling</a>
+				</nav>
+			</div>
+
+			<div class="container">
+
+				<!-- ---------- PILLAR 01 · FITNESS ---------- -->
+				<section class="pillar" id="fitness" data-pillar>
+					<div class="pillar-head reveal">
+						<div class="p-index"><span class="num">01 / Fitness</span><span class="ln"></span></div>
+						<h2>Strength, programmed.</h2>
+						<p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder pillar
+							copy — strength &amp; conditioning, periodised and tracked. Replace with real description.
+						</p>
+					</div>
+					<div class="pillar-body">
+						<div class="reveal">
+							<div class="samples-head">
+								<span class="mono mono--sm">Sample work</span>
+								<span class="mono mono--sm" style="color:var(--faint)">03 clips</span>
+							</div>
+							<div class="samples">
+								<article class="tile tile--sample" tabindex="0" role="button" data-idx="F·01"
+									data-label="Fitness — reel 01" aria-label="Open fitness reel 01">
+									<div class="poster">
+										<div class="ph" style="--px:34%;--py:26%"></div>
+									</div>
+									<span class="mono mono--sm tlabel">f·01</span><span class="play"><span
+											class="tri"></span></span><span class="scrub"></span>
+								</article>
+								<article class="tile tile--sample" tabindex="0" role="button" data-idx="F·02"
+									data-label="Fitness — reel 02" aria-label="Open fitness reel 02">
+									<div class="poster">
+										<div class="ph" style="--px:58%;--py:44%"></div>
+									</div>
+									<span class="mono mono--sm tlabel">f·02</span><span class="play"><span
+											class="tri"></span></span><span class="scrub"></span>
+								</article>
+								<article class="tile tile--sample" tabindex="0" role="button" data-idx="F·03"
+									data-label="Fitness — reel 03" aria-label="Open fitness reel 03">
+									<div class="poster">
+										<div class="ph" style="--px:46%;--py:62%"></div>
+									</div>
+									<span class="mono mono--sm tlabel">f·03</span><span class="play"><span
+											class="tri"></span></span><span class="scrub"></span>
+								</article>
+							</div>
+						</div>
+
+						<div class="ratecard reveal">
+							<div class="ratecard-head">
+								<span class="rc-title">Rate sheet — Fitness</span>
+								<span class="rc-tag">[ placeholder pricing ]</span>
+							</div>
+							<div class="rate-row">
+								<span class="rate-name">1:1 coaching<span class="unit">Monthly retainer</span></span>
+								<span class="rate-price"><span class="cur">$</span>0,000<i> /mo</i></span>
+								<p class="rate-desc">Custom programming, weekly check-ins, form review. Placeholder line
+									item.</p>
+							</div>
+							<div class="rate-row">
+								<span class="rate-name">12-week build<span class="unit">One-off program</span></span>
+								<span class="rate-price"><span class="cur">$</span>0,000</span>
+								<p class="rate-desc">A full periodised block, delivered and tracked. Placeholder line
+									item.</p>
+							</div>
+							<div class="rate-row">
+								<span class="rate-name">Single session<span class="unit">Per session</span></span>
+								<span class="rate-price"><span class="cur">$</span>000</span>
+								<p class="rate-desc">One focused 60-minute working session. Placeholder line item.</p>
+							</div>
+							<div class="ratecard-foot">
+								<span class="rc-note">Custom scopes on request</span>
+								<a class="btn btn--gold" href="#/contact" data-cursor>Start a project <span
+										class="arr">→</span></a>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- ---------- PILLAR 02 · DIET ---------- -->
+				<section class="pillar" id="diet" data-pillar>
+					<div class="pillar-head reveal">
+						<div class="p-index"><span class="num">02 / Diet</span><span class="ln"></span></div>
+						<h2>Nutrition, as a system.</h2>
+						<p class="p-desc">Ut enim ad minim veniam, quis nostrud exercitation. Placeholder pillar copy —
+							habits and intake, engineered to be repeatable. Replace with real description.</p>
+					</div>
+					<div class="pillar-body">
+						<div class="reveal">
+							<div class="samples-head">
+								<span class="mono mono--sm">Sample work</span>
+								<span class="mono mono--sm" style="color:var(--faint)">03 clips</span>
+							</div>
+							<div class="samples">
+								<article class="tile tile--sample" tabindex="0" role="button" data-idx="D·01"
+									data-label="Diet — reel 01" aria-label="Open diet reel 01">
+									<div class="poster">
+										<div class="ph" style="--px:40%;--py:30%"></div>
+									</div>
+									<span class="mono mono--sm tlabel">d·01</span><span class="play"><span
+											class="tri"></span></span><span class="scrub"></span>
+								</article>
+								<article class="tile tile--sample" tabindex="0" role="button" data-idx="D·02"
+									data-label="Diet — reel 02" aria-label="Open diet reel 02">
+									<div class="poster">
+										<div class="ph" style="--px:62%;--py:52%"></div>
+									</div>
+									<span class="mono mono--sm tlabel">d·02</span><span class="play"><span
+											class="tri"></span></span><span class="scrub"></span>
+								</article>
+								<article class="tile tile--sample" tabindex="0" role="button" data-idx="D·03"
+									data-label="Diet — reel 03" aria-label="Open diet reel 03">
+									<div class="poster">
+										<div class="ph" style="--px:30%;--py:48%"></div>
+									</div>
+									<span class="mono mono--sm tlabel">d·03</span><span class="play"><span
+											class="tri"></span></span><span class="scrub"></span>
+								</article>
+							</div>
+						</div>
+
+						<div class="ratecard reveal">
+							<div class="ratecard-head">
+								<span class="rc-title">Rate sheet — Diet</span>
+								<span class="rc-tag">[ placeholder pricing ]</span>
+							</div>
+							<div class="rate-row">
+								<span class="rate-name">Nutrition system<span class="unit">One-off build</span></span>
+								<span class="rate-price"><span class="cur">$</span>0,000</span>
+								<p class="rate-desc">Intake plan, targets, and a habit framework. Placeholder line item.
+								</p>
+							</div>
+							<div class="rate-row">
+								<span class="rate-name">Monthly guidance<span class="unit">Ongoing</span></span>
+								<span class="rate-price"><span class="cur">$</span>000<i> /mo</i></span>
+								<p class="rate-desc">Adjustments, accountability, and check-ins. Placeholder line item.
+								</p>
+							</div>
+							<div class="rate-row">
+								<span class="rate-name">Consult<span class="unit">60 minutes</span></span>
+								<span class="rate-price"><span class="cur">$</span>000</span>
+								<p class="rate-desc">A single strategy call to map the approach. Placeholder line item.
+								</p>
+							</div>
+							<div class="ratecard-foot">
+								<span class="rc-note">Bundled with coaching on request</span>
+								<a class="btn btn--gold" href="#/contact" data-cursor>Start a project <span
+										class="arr">→</span></a>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- ---------- PILLAR 03 · STORYTELLING ---------- -->
+				<section class="pillar" id="storytelling" data-pillar style="border-bottom:0">
+					<div class="pillar-head reveal">
+						<div class="p-index"><span class="num">03 / Storytelling</span><span class="ln"></span></div>
+						<h2>Content &amp; brand work.</h2>
+						<p class="p-desc">Duis aute irure dolor in reprehenderit. Placeholder pillar copy —
+							narrative-led content and brand partnerships. Replace with real description.</p>
+					</div>
+					<div class="pillar-body">
+						<div class="reveal">
+							<div class="samples-head">
+								<span class="mono mono--sm">Sample work</span>
+								<span class="mono mono--sm" style="color:var(--faint)">03 clips</span>
+							</div>
+							<div class="samples">
+								<article class="tile tile--sample" tabindex="0" role="button" data-idx="S·01"
+									data-label="Storytelling — reel 01" aria-label="Open storytelling reel 01">
+									<div class="poster">
+										<div class="ph" style="--px:36%;--py:24%"></div>
+									</div>
+									<span class="mono mono--sm tlabel">s·01</span><span class="play"><span
+											class="tri"></span></span><span class="scrub"></span>
+								</article>
+								<article class="tile tile--sample" tabindex="0" role="button" data-idx="S·02"
+									data-label="Storytelling — reel 02" aria-label="Open storytelling reel 02">
+									<div class="poster">
+										<div class="ph" style="--px:54%;--py:40%"></div>
+									</div>
+									<span class="mono mono--sm tlabel">s·02</span><span class="play"><span
+											class="tri"></span></span><span class="scrub"></span>
+								</article>
+								<article class="tile tile--sample" tabindex="0" role="button" data-idx="S·03"
+									data-label="Storytelling — reel 03" aria-label="Open storytelling reel 03">
+									<div class="poster">
+										<div class="ph" style="--px:48%;--py:60%"></div>
+									</div>
+									<span class="mono mono--sm tlabel">s·03</span><span class="play"><span
+											class="tri"></span></span><span class="scrub"></span>
+								</article>
+							</div>
+						</div>
+
+						<div class="ratecard reveal">
+							<div class="ratecard-head">
+								<span class="rc-title">Rate sheet — Storytelling</span>
+								<span class="rc-tag">[ placeholder pricing ]</span>
+							</div>
+							<div class="rate-row">
+								<span class="rate-name">Single reel<span class="unit">Per piece</span></span>
+								<span class="rate-price"><span class="cur">$</span>000</span>
+								<p class="rate-desc">Concept, shoot direction, edit. Placeholder line item.</p>
+							</div>
+							<div class="rate-row">
+								<span class="rate-name">Content pack<span class="unit">×6 reels</span></span>
+								<span class="rate-price"><span class="cur">$</span>0,000</span>
+								<p class="rate-desc">A batched set with a consistent through-line. Placeholder line
+									item.</p>
+							</div>
+							<div class="rate-row">
+								<span class="rate-name">Brand partnership<span class="unit">Scoped</span></span>
+								<span class="rate-price">On request</span>
+								<p class="rate-desc">Integrated campaigns and ongoing collaborations. Placeholder line
+									item.</p>
+							</div>
+							<div class="ratecard-foot">
+								<span class="rc-note">Media kit available on request</span>
+								<a class="btn btn--gold" href="#/contact" data-cursor>Start a project <span
+										class="arr">→</span></a>
+							</div>
+						</div>
+					</div>
+
+					<!-- brand deals — fuller "trusted by" treatment -->
+					<div class="reveal" style="margin-top:clamp(48px,7vh,80px)">
+						<div class="sec-head">
+							<div>
+								<div class="section-index"><span class="dot"></span><span class="mono mono--sm">Brand
+										deals — selected</span></div>
+								<h2 class="sec-title">Logos, as data points.</h2>
+							</div>
+							<p class="sec-note">The full roster of partnerships. <span
+									style="color:var(--faint)">[Placeholder partners; hover to gild.]</span></p>
+						</div>
+						<div class="logos">
+							<div class="logo-cell" data-cursor><span class="logo-mark">LUMA</span><span
+									class="logo-idx">↗ 01</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">FORGE</span><span
+									class="logo-idx">↗ 02</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">MERIDIAN</span><span
+									class="logo-idx">↗ 03</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">ATLAS</span><span
+									class="logo-idx">↗ 04</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">NORDA</span><span
+									class="logo-idx">↗ 05</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">KILN</span><span
+									class="logo-idx">↗ 06</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">VANTA</span><span
+									class="logo-idx">↗ 07</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">HALCYON</span><span
+									class="logo-idx">↗ 08</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">OBELISK</span><span
+									class="logo-idx">↗ 09</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">CINDER</span><span
+									class="logo-idx">↗ 10</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">PRAXIS</span><span
+									class="logo-idx">↗ 11</span></div>
+							<div class="logo-cell" data-cursor><span class="logo-mark">SOLACE</span><span
+									class="logo-idx">↗ 12</span></div>
+						</div>
+					</div>
+				</section>
+
+			</div>
+		</section>
+
+		<!-- ============================ CONTACT VIEW ============================ -->
+		<section id="view-contact" class="view" data-screen-label="Contact">
+			<section class="container contact-wrap">
+				<div class="contact-grid">
+
+					<div class="contact-intro">
+						<div class="section-index reveal">
+							<span class="dot"></span>
+							<span class="mono mono--sm">Contact — open a channel</span>
+						</div>
+						<h1 data-view-heading>Dial in a <em
+								style="font-style:normal;color:var(--gold);-webkit-text-fill-color:transparent;background:var(--gold-sheen);-webkit-background-clip:text;background-clip:text">transmission.</em>
+						</h1>
+						<p class="lead reveal">Tell me what you're building and where you want it to go. <span
+								style="color:var(--faint)">[Placeholder copy.]</span></p>
+
+						<div class="contact-readout reveal">
+							<div class="ro"><span class="k">Channel</span><span class="v online">Open</span></div>
+							<div class="ro"><span class="k">Response</span><span class="v">~ 24–48 hrs</span></div>
+							<div class="ro"><span class="k">Based in</span><span class="v">[City] · [Country]</span>
+							</div>
+							<div class="ro"><span class="k">Direct</span><span class="v">hello@placeholder.com</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- terminal console form — fully keyboard-accessible; mailto fallback in JS -->
+					<div class="terminal reveal" role="group" aria-label="Contact form">
+						<div class="terminal-bar">
+							<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="ttitle">secure channel // session 0x1A</span>
+						</div>
+						<form id="contact-form" class="terminal-body" novalidate>
+							<p class="terminal-line" aria-hidden="true"><span class="gold">›</span> establishing
+								connection… <span class="gold">ok</span></p>
+
+							<div class="tfield">
+								<label class="key" for="cf-name">Identify</label>
+								<div class="inwrap"><span class="pr" aria-hidden="true">›</span>
+									<input class="tinput" id="cf-name" name="name" type="text" required
+										autocomplete="name" placeholder="your name" />
+								</div>
+							</div>
+							<div class="tfield">
+								<label class="key" for="cf-email">Return address</label>
+								<div class="inwrap"><span class="pr" aria-hidden="true">›</span>
+									<input class="tinput" id="cf-email" name="email" type="email" required
+										autocomplete="email" placeholder="you@domain.com" />
+								</div>
+							</div>
+							<div class="tfield">
+								<label class="key" for="cf-msg">Payload</label>
+								<div class="inwrap"><span class="pr" aria-hidden="true">›</span>
+									<textarea class="tinput" id="cf-msg" name="message" rows="3" required
+										placeholder="what are we building?"></textarea>
+								</div>
+							</div>
+
+							<div class="terminal-foot">
+								<span class="mono mono--sm" style="color:var(--faint)">Enter to send · fallback opens
+									mail</span>
+								<button class="btn btn--gold" type="submit" data-cursor>Transmit <span
+										class="arr">→</span></button>
+							</div>
+
+							<div class="terminal-log" id="contact-ok" role="status" aria-live="polite" hidden>
+								<div><span class="muted">›</span> payload queued… <span
+										style="color:var(--gold)">ok</span></div>
+								<div><span class="muted">›</span> opening secure channel to <span
+										style="color:var(--gold)">hello@placeholder.com</span></div>
+								<div><span class="muted">›</span> if nothing opens, write us directly. <span
+										style="color:var(--gold)">end ▮</span></div>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</section>
+		</section>
+
+	</main>
+
+	<!-- ============================ SHARED FOOTER ============================ -->
+	<footer class="site-footer">
+		<div class="container footer-grid">
+			<span class="wordmark" style="font-size:0.82rem">Shreya<span class="sep">·</span>Chanth</span>
+			<div class="footer-links">
+				<a class="footer-link" href="https://instagram.com/" target="_blank" rel="noopener"
+					data-cursor>Instagram ↗</a>
+				<a class="footer-link" href="mailto:hello@placeholder.com" data-cursor>hello@placeholder.com</a>
+			</div>
+			<span class="footer-tag">[ Built to spec · placeholder tagline ]</span>
+		</div>
+	</footer>
+
+	<!-- ============================ LIGHTBOX ============================ -->
+	<div class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Reel preview">
+		<div class="lightbox-inner">
+			<button class="lightbox-close mono" aria-label="Close preview">Close ✕</button>
+			<div class="lightbox-media">
+				<div class="ph" style="--px:40%;--py:30%"></div>
+			</div>
+			<div class="lightbox-bar">
+				<span class="mono mono--sm"><span data-lb-label>Reel</span></span>
+				<span class="mono mono--sm mono--gold">№ <span data-lb-idx>—</span> / 16</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- ====================== SCRIPTS ======================
+     three.js r128 from cdnjs (libs are cdnjs-only). Then isolated modules.
+     GSAP/ScrollTrigger intentionally omitted in this prototype (see app.js seam). -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script>
+	<script src="assets/hero.js"></script>
+	<script src="assets/app.js"></script>
+</body>
+
+</html>

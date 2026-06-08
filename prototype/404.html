@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>404 — coordinate not found · Shreya Chanth</title>
+	<meta name="description" content="The page you're looking for isn't on the grid." />
+	<meta name="robots" content="noindex" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+		rel="stylesheet" />
+
+	<link rel="stylesheet" href="assets/styles.css" />
+
+	<style>
+		/* =============================================================================
+   404 — "coordinate not found"
+   An instrument that can't lock a location. The 0 of 404 becomes a crosshair
+   reticle (hairlines + a circle), with a mono diagnostic readout and a quiet
+   scanning sweep. Reuses every :root token. transform/opacity motion only.
+   ============================================================================= */
+		.nf {
+			min-height: calc(100vh - var(--nav-h));
+			min-height: calc(100svh - var(--nav-h));
+			display: flex;
+			align-items: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		/* slow scanning hairline that sweeps the field — the instrument "searching" */
+		.nf-scan {
+			position: absolute;
+			inset: 0;
+			z-index: 0;
+			pointer-events: none;
+		}
+
+		.nf-scan::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 40vw;
+			background: linear-gradient(90deg, transparent 0, rgba(201, 162, 75, 0.05) 50%, transparent 100%);
+			transform: translateX(-60vw);
+			animation: nfSweep 7s var(--ease) infinite;
+		}
+
+		@keyframes nfSweep {
+			0% {
+				transform: translateX(-60vw);
+			}
+
+			100% {
+				transform: translateX(160vw);
+			}
+		}
+
+		.nf .container {
+			position: relative;
+			z-index: 2;
+			width: 100%;
+		}
+
+		.nf-eyebrow {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			margin-bottom: 34px;
+		}
+
+		.nf-eyebrow .tick {
+			width: 26px;
+			height: var(--hairline-w);
+			background: var(--gold);
+		}
+
+		/* the big code: 4 · reticle · 4 — mono, tabular, gilded glyphs */
+		.nf-code {
+			display: flex;
+			align-items: center;
+			gap: clamp(6px, 1.4vw, 20px);
+			font-family: var(--font-mono);
+			font-weight: 500;
+			line-height: 0.8;
+			font-size: clamp(6rem, 22vw, 17rem);
+			letter-spacing: -0.04em;
+			font-variant-numeric: tabular-nums;
+		}
+
+		.nf-code .d {
+			color: transparent;
+			background: var(--gold-sheen);
+			-webkit-background-clip: text;
+			background-clip: text;
+		}
+
+		/* the reticle that stands in for the middle 0 */
+		.nf-ret {
+			position: relative;
+			width: clamp(5rem, 18vw, 13.5rem);
+			aspect-ratio: 1;
+			flex: 0 0 auto;
+			display: grid;
+			place-items: center;
+		}
+
+		.nf-ret .ring {
+			position: absolute;
+			inset: 12%;
+			border: var(--hairline-w) solid var(--gold-line);
+			border-radius: 50%;
+		}
+
+		.nf-ret .ring.r2 {
+			inset: 30%;
+			border-color: var(--hairline);
+		}
+
+		.nf-ret .ring.spin {
+			inset: 2%;
+			border-color: transparent;
+			border-top-color: var(--gold);
+			animation: nfSpin 5.5s linear infinite;
+		}
+
+		@keyframes nfSpin {
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		/* cross hairs */
+		.nf-ret .cross-h,
+		.nf-ret .cross-v {
+			position: absolute;
+			background: var(--hairline);
+		}
+
+		.nf-ret .cross-h {
+			left: 0;
+			right: 0;
+			height: var(--hairline-w);
+			top: 50%;
+		}
+
+		.nf-ret .cross-v {
+			top: 0;
+			bottom: 0;
+			width: var(--hairline-w);
+			left: 50%;
+		}
+
+		.nf-ret .pip {
+			width: 9px;
+			height: 9px;
+			border-radius: 50%;
+			background: var(--gold);
+			box-shadow: 0 0 0 0 var(--gold-line);
+			animation: pulse 2.6s var(--ease) infinite;
+		}
+
+		/* corner ticks */
+		.nf-ret .tk {
+			position: absolute;
+			width: 12px;
+			height: 12px;
+			border: var(--hairline-w) solid var(--gold-line);
+		}
+
+		.nf-ret .tk.tl {
+			top: 6%;
+			left: 6%;
+			border-right: 0;
+			border-bottom: 0;
+		}
+
+		.nf-ret .tk.tr {
+			top: 6%;
+			right: 6%;
+			border-left: 0;
+			border-bottom: 0;
+		}
+
+		.nf-ret .tk.bl {
+			bottom: 6%;
+			left: 6%;
+			border-right: 0;
+			border-top: 0;
+		}
+
+		.nf-ret .tk.br {
+			bottom: 6%;
+			right: 6%;
+			border-left: 0;
+			border-top: 0;
+		}
+
+		.nf-lead {
+			margin-top: 40px;
+			font-size: var(--fs-h2);
+			font-weight: 600;
+			letter-spacing: -0.03em;
+			max-width: 18ch;
+		}
+
+		.nf-lead em {
+			font-style: normal;
+			color: var(--gold);
+			-webkit-text-fill-color: transparent;
+			background: var(--gold-sheen);
+			-webkit-background-clip: text;
+			background-clip: text;
+		}
+
+		.nf-sub {
+			margin-top: 18px;
+			color: var(--muted);
+			max-width: 46ch;
+			font-size: var(--fs-body);
+		}
+
+		/* diagnostic readout — same spec-row language as the rest of the site */
+		.nf-readout {
+			margin-top: 40px;
+			max-width: 560px;
+			border-top: var(--hairline-w) solid var(--hairline);
+		}
+
+		.nf-readout .ro {
+			display: grid;
+			grid-template-columns: 150px 1fr;
+			gap: 18px;
+			align-items: baseline;
+			padding: 14px 0;
+			border-bottom: var(--hairline-w) solid var(--hairline);
+		}
+
+		.nf-readout .ro .k {
+			font-family: var(--font-mono);
+			font-size: var(--fs-mono-sm);
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+			color: var(--faint);
+		}
+
+		.nf-readout .ro .v {
+			font-family: var(--font-mono);
+			font-size: var(--fs-mono);
+			color: var(--text);
+			word-break: break-all;
+		}
+
+		.nf-readout .ro .v.bad {
+			color: var(--gold);
+		}
+
+		.nf-actions {
+			margin-top: 44px;
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			flex-wrap: wrap;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+
+			.nf-scan::after,
+			.nf-ret .ring.spin,
+			.nf-ret .pip {
+				animation: none !important;
+			}
+
+			.nf-ret .ring.spin {
+				border-top-color: transparent;
+			}
+		}
+
+		@media (max-width: 560px) {
+			.nf-readout .ro {
+				grid-template-columns: 1fr;
+				gap: 4px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- custom cursor (disabled on touch + reduced-motion in JS) -->
+	<div class="cursor-ring" aria-hidden="true"></div>
+	<div class="cursor-dot" aria-hidden="true"></div>
+
+	<!-- ============================ SHARED HEADER ============================ -->
+	<header class="site-header">
+		<nav class="nav" aria-label="Primary">
+			<a class="wordmark" href="index.html#/" aria-label="Shreya Chanth — home">Shreya<span
+					class="sep">·</span>Chanth</a>
+			<div class="nav-links">
+				<a class="nav-link" href="index.html#/" data-cursor>Home</a>
+				<a class="nav-link" href="index.html#/work" data-cursor>Work with me</a>
+				<a class="nav-link" href="index.html#/contact" data-cursor>Contact</a>
+			</div>
+		</nav>
+	</header>
+
+	<main class="shell">
+		<section class="nf" aria-labelledby="nf-title">
+			<div class="nf-scan" aria-hidden="true"></div>
+			<div class="container">
+
+				<div class="nf-eyebrow">
+					<span class="tick"></span>
+					<span class="mono mono--sm">Error 404 · signal lost</span>
+				</div>
+
+				<!-- 4 · reticle · 4 -->
+				<div class="nf-code" role="img" aria-label="404">
+					<span class="d">4</span>
+					<span class="nf-ret" aria-hidden="true">
+						<span class="ring"></span>
+						<span class="ring r2"></span>
+						<span class="ring spin"></span>
+						<span class="cross-h"></span>
+						<span class="cross-v"></span>
+						<span class="tk tl"></span><span class="tk tr"></span>
+						<span class="tk bl"></span><span class="tk br"></span>
+						<span class="pip"></span>
+					</span>
+					<span class="d">4</span>
+				</div>
+
+				<h1 class="nf-lead" id="nf-title">This coordinate isn't <em>on the grid.</em></h1>
+				<p class="nf-sub">The page you're after has moved, retired, or never existed. The instrument keeps
+					scanning — but you'll get there faster from a known route below.</p>
+
+				<!-- diagnostic readout -->
+				<div class="nf-readout">
+					<div class="ro"><span class="k">Requested</span><span class="v bad" data-nf-path>—</span></div>
+					<div class="ro"><span class="k">Status</span><span class="v">404 · not found</span></div>
+					<div class="ro"><span class="k">Nearest route</span><span class="v">/ · home</span></div>
+				</div>
+
+				<div class="nf-actions">
+					<a class="btn btn--gold" href="index.html#/" data-cursor>Return home <span
+							class="arr">→</span></a>
+					<a class="btn btn--ghost" href="index.html#/work" data-cursor>Work with me</a>
+				</div>
+
+			</div>
+		</section>
+	</main>
+
+	<!-- ============================ SHARED FOOTER ============================ -->
+	<footer class="site-footer">
+		<div class="container footer-grid">
+			<span class="wordmark" style="font-size:0.82rem">Shreya<span class="sep">·</span>Chanth</span>
+			<div class="footer-links">
+				<a class="footer-link" href="https://instagram.com/" target="_blank" rel="noopener"
+					data-cursor>Instagram ↗</a>
+				<a class="footer-link" href="mailto:hello@placeholder.com" data-cursor>hello@placeholder.com</a>
+			</div>
+			<span class="footer-tag">[ Built to spec · placeholder tagline ]</span>
+		</div>
+	</footer>
+
+	<!-- Reuse the shared app for the custom cursor + nav condense. The router/lightbox/
+     three.js all guard on missing elements, so they no-op safely on this page. -->
+	<script src="assets/app.js"></script>
+	<script>
+		/* Echo the path the visitor actually tried — in the Cloudflare Pages build this
+		   is the real 404 path; here we read it from the URL (?path= or the location). */
+		(function () {
+			var params = new URLSearchParams(location.search);
+			var requested = params.get("path") || (location.pathname + location.hash) || "/unknown";
+			var el = document.querySelector("[data-nf-path]");
+			if (el) el.textContent = requested.length > 64 ? requested.slice(0, 61) + "…" : requested;
+		})();
+	</script>
+</body>
+
+</html>
