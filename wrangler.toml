@@ -1,36 +1,11 @@
 name = "shreyachanth"
 compatibility_date = "2024-01-01"
-
-# ── KV Namespaces ────────────────────────────────────────────────────────────
-# Bind these in Cloudflare Pages → Settings → Functions → KV namespace bindings
-# after creating the namespaces with:
-#   npx wrangler kv:namespace create FEED_CACHE
-#   npx wrangler kv:namespace create RL
-#
-# Replace the id placeholders with the IDs wrangler returns.
+pages_build_output_dir = "./dist"
 
 [[kv_namespaces]]
 binding = "FEED_CACHE"
-id = "PLACEHOLDER_FEED_CACHE_KV_NAMESPACE_ID"
+id = "7178dda5d9db42a3be57dbcd2efd4975"
 
 [[kv_namespaces]]
 binding = "RL"
-id = "PLACEHOLDER_RL_KV_NAMESPACE_ID"
-
-# ── Pages configuration ───────────────────────────────────────────────────────
-[site]
-bucket = "./dist"
-
-# ── Environment variables (server-side only — never VITE_ prefix) ─────────────
-# Set these as Encrypted variables in Cloudflare Pages → Settings → Environment Variables.
-# They are NOT in this file (they contain secrets).
-#
-# Required variables:
-#   RESEND_API_KEY         — Resend API key for email delivery
-#   TURNSTILE_SECRET_KEY   — Cloudflare Turnstile secret key for server-side verification
-#   BEHOLD_FEED_ID         — Behold feed ID for Instagram proxy (functions/feed.ts)
-#   SENTRY_DSN             — (optional) Sentry ingest URL for JS error monitoring
-
-# ── Local dev vars ────────────────────────────────────────────────────────────
-# Copy .env.example to .dev.vars and fill in values for `wrangler pages dev`.
-# .dev.vars is gitignored.
+id = "1cabf0caa9944963916cf7d286ca639f"
