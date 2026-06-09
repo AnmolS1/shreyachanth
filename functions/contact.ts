@@ -104,7 +104,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       },
       body: JSON.stringify({
         from: 'contact@shreyachanth.com',
-        to: 'shreya@shreyachanth.com',
+        to: 'contact@shreyachanth.com',
         reply_to: stripCRLF(email),
         subject: `Portfolio inquiry from ${stripCRLF(name)}`,
         text: `From: ${stripCRLF(name)} <${stripCRLF(email)}>\n\n${message}`,
