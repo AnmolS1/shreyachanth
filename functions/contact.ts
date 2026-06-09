@@ -24,6 +24,7 @@ interface Env {
   RESEND_API_KEY: string
   TURNSTILE_SECRET_KEY: string
   RL: KVNamespace
+  CONTACT_DRY_RUN?: string   // set in .dev.vars to skip Resend during local dev
 }
 
 const Schema = z.object({
@@ -88,7 +89,12 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return new Response('Verification failed', { status: 502 })
   }
 
-  // 6. Send via Resend — plain text only; strip CR/LF from header fields
+  // 6. Dev dry-run: skip Resend entirely (set CONTACT_DRY_RUN in .dev.vars for local testing)
+  if (env.CONTACT_DRY_RUN) {
+    return Response.json({ ok: true })
+  }
+
+  // 7. Send via Resend — plain text only; strip CR/LF from header fields
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',

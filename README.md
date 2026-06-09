@@ -23,19 +23,19 @@ cp .env.example .env
 For local testing of Pages Functions (contact form, Instagram feed proxy):
 
 ```bash
-# 1. Create .dev.vars from the example (wrangler reads this file for local env vars)
-cp .env.example .dev.vars
-# Edit .dev.vars — fill in RESEND_API_KEY, TURNSTILE_SECRET_KEY, BEHOLD_FEED_ID, etc.
+# 1. .dev.vars is already set up with test keys and CONTACT_DRY_RUN=1 (gitignored).
+#    If you've lost it, copy .env.example to .dev.vars and fill in the secrets.
 
-# 2. Run wrangler in proxy mode (it serves the Pages Functions and forwards
-#    everything else to the Vite dev server). KV namespaces run in-memory locally.
-npx wrangler pages dev --proxy 5173 -- npm run dev
+# 2. Build and serve with wrangler. KV namespaces run in-memory locally.
+#    --live-reload refreshes the browser when the built dist changes.
+npm run dev:pages
 ```
 
-> **Without wrangler** (`npm run dev` only): the `/feed` endpoint returns the Vite
-> dev server's fallback HTML, which triggers the `InstagramRail` error handler and
-> gracefully renders the curated placeholder posts. This is expected — not a bug.
-> The real Behold data only appears when running via wrangler as above.
+> **Without wrangler** (`npm run dev` only): the `/feed` and `/contact` endpoints
+> are not served (Vite has no route for them). `InstagramRail` falls back to the
+> curated placeholder posts, and the contact form falls back to `mailto:`. This is
+> expected for UI-only development — not a bug. Run `npm run dev:pages` to test the
+> full stack including Functions, CSP headers, and SPA routing.
 
 ---
 
