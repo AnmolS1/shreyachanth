@@ -20,7 +20,7 @@ export const seo: Seo = SeoSchema.parse({
   defaultDescription:
     '[PLACEHOLDER: meta description — 150–160 chars of real positioning copy]',
   ogImage: 'https://shreyachanth.com/icons/og-image.jpg',
-  instagramUrl: 'https://instagram.com/', // [PLACEHOLDER: real IG URL]
-  contactEmail: 'shreya@shreyachanth.com', // [PLACEHOLDER: real email]
+  instagramUrl: 'https://instagram.com/shrookya',
+  contactEmail: 'contact@shreyachanth.com',
   footerTagline: '[ Built to spec · shreyachanth.com ]',
 })

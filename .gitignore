@@ -28,3 +28,4 @@ dist/
 # TypeScript
 *.tsbuildinfo
 .wrangler/
+.wrangler/

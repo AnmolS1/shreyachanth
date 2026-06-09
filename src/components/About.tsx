@@ -34,15 +34,24 @@ export default function About() {
 
             <div
               className="portrait ph-static"
-              role="img"
-              aria-label={about.portraitAlt}
+              {...(!about.portrait && { role: 'img', 'aria-label': about.portraitAlt })}
             >
-              <div
-                className="ph"
-                style={
-                  { '--px': '38%', '--py': '30%' } as React.CSSProperties
-                }
-              />
+              {about.portrait ? (
+                <img
+                  className="portrait-img"
+                  src={about.portrait}
+                  alt={about.portraitAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div
+                  className="ph"
+                  style={
+                    { '--px': '38%', '--py': '30%' } as React.CSSProperties
+                  }
+                />
+              )}
               <span className="mono mono--sm meta">fig.01 — portrait</span>
             </div>
           </div>

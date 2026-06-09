@@ -22,6 +22,9 @@ export const AboutSchema = z.object({
   // ── Identity ──────────────────────────────────────────────────────────────
   name: z.string(),
   portraitAlt: z.string(),
+  /** Root-relative path or media-host URL for the portrait photo.
+   *  e.g. '/images/portrait.jpg' — leave unset to show the placeholder gradient. */
+  portrait: z.string().optional(),
 
   // ── Hero section ──────────────────────────────────────────────────────────
   eyebrow: z.string(),      // mono label above h1
@@ -44,7 +47,8 @@ export type About = z.infer<typeof AboutSchema>
 
 export const about: About = AboutSchema.parse({
   name: 'Shreya Chanth',
-  portraitAlt: 'Portrait of Shreya Chanth',
+  portrait: '/images/portrait.jpg',
+  portraitAlt: 'Shreya Chanth - portrait',
 
   // ── Hero ──────────────────────────────────────────────────────────────────
   eyebrow: 'Coach · Creator · Est. 2025',
@@ -57,9 +61,9 @@ export const about: About = AboutSchema.parse({
 
   // ── Dossier ───────────────────────────────────────────────────────────────
   tagline: 'A systems mind, applied to the body.',
-  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder bio copy — replace with real text. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Built deliberately, refined continuously. Ut enim ad minim veniam, quis nostrud exercitation.',
+  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
   specs: [
-    { label: 'Based in',        value: '[PLACEHOLDER: City · Country]' },
+    { label: 'Based in',        value: 'Toronto · Ontario' },
     { label: 'Focus',           value: 'Strength · Conditioning · Story', note: '03' },
     { label: 'Coaching since',  value: 'Building, one rep at a time', note: '2025' },
     { label: 'Athletes coached',value: '[PLACEHOLDER: figure]', note: '80+' },

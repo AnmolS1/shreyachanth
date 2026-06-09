@@ -62,7 +62,7 @@ export default function ContactForm() {
     if (!SITE_KEY) {
       const subject = encodeURIComponent(`Portfolio inquiry from ${form.name}`)
       const body = encodeURIComponent(`From: ${form.name} <${form.email}>\n\n${form.message}`)
-      window.location.href = `mailto:shreya@shreyachanth.com?subject=${subject}&body=${body}`
+      window.location.href = `mailto:contact@shreyachanth.com?subject=${subject}&body=${body}`
       return
     }
 
