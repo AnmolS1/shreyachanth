@@ -1,0 +1,11 @@
+name = "shreyachanth"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "./dist"
+
+[[kv_namespaces]]
+binding = "FEED_CACHE"
+id = "7178dda5d9db42a3be57dbcd2efd4975"
+
+[[kv_namespaces]]
+binding = "RL"
+id = "1cabf0caa9944963916cf7d286ca639f"
