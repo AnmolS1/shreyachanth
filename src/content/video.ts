@@ -37,11 +37,11 @@ export const VideoItemSchema = z.object({
 export type VideoItem = z.infer<typeof VideoItemSchema>
 
 /**
- * Ordered bento tile layout — 16 items matching the prototype grid.
+ * Ordered bento tile layout — 15 items matching the prototype grid.
  * Source files: videos/*.MOV → transcoded to public/videos/*.mp4 + .webm
  * Poster frames: public/posters/*.jpg
  *
- * Variant layout (16 tiles):
+ * Variant layout (15 tiles):
  * big  v    v    sq   wide  v    v-tall  sq
  * v    wide v    sq   v-tall v   wide    v
  */
@@ -212,17 +212,6 @@ export const videos: VideoItem[] = VideoItemSchema.array().parse([
     poster: `${MEDIA_BASE}/posters/reel-15.jpg`,
     px: 50, py: 40,
     pillar: 'bento',
-  },
-  {
-    id: 'reel-16',
-    title: 'Reel 16',
-    duration: '0:08',
-    variant: 'v',
-    mp4:    `${MEDIA_BASE}/videos/reel-16.mp4`,
-    webm:   `${MEDIA_BASE}/videos/reel-16.webm`,
-    poster: `${MEDIA_BASE}/posters/reel-16.jpg`,
-    px: 50, py: 40,
-    pillar: 'diet',
   },
 ])
 

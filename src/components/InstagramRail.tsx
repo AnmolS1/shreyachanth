@@ -115,7 +115,7 @@ export default function InstagramRail() {
           <div>
             <div className="section-index reveal">
               <span className="dot" aria-hidden="true" />
-              <span className="mono mono--sm">03 / 04 — Instagram</span>
+              <span className="mono mono--sm">03 — Instagram</span>
             </div>
             <h2 className="sec-title reveal" id="ig-title">
               From the feed.

@@ -1,6 +1,6 @@
 /**
  * VideoBento — section 02/04 on Home route.
- * 16 mixed-ratio tiles; each is a <button aria-haspopup="dialog"> that opens
+ * 15 mixed-ratio tiles; each is a <button aria-haspopup="dialog"> that opens
  * the <dialog>-based lightbox.
  *
  * Tile video playback:
@@ -188,14 +188,14 @@ export default function VideoBento() {
           <div>
             <div className="section-index reveal">
               <span className="dot" aria-hidden="true" />
-              <span className="mono mono--sm">02 / 04 — Reel index</span>
+              <span className="mono mono--sm">02 — Reel index</span>
             </div>
             <h2 className="sec-title reveal" id="reel-title">
               Selected work, by the clip.
             </h2>
           </div>
           <p className="sec-note reveal">
-            Sixteen pieces, native ratios preserved. Hover to preview; click to expand.
+            Fifteen samples. Hover to preview; click to expand.
           </p>
         </div>
 

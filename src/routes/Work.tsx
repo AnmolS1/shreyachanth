@@ -293,7 +293,7 @@ export default function Work() {
           </div>
 
           {/* ── Brand deals ─────────────────────────────────────────────── */}
-          <TrustedBy variant="work" />
+          {/* <TrustedBy variant="work" /> */}
         </section>
       </div>
 

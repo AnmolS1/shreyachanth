@@ -51,9 +51,9 @@ export const about: About = AboutSchema.parse({
   portraitAlt: 'Shreya Chanth - portrait',
 
   // ── Hero ──────────────────────────────────────────────────────────────────
-  eyebrow: 'Coach · Creator · Est. 2025',
-  heroLine1: 'Built from zero.',
-  heroLine2: 'Tuned for momentum.',
+  eyebrow: 'Coach · Creator',
+  heroLine1: 'Already in',
+  heroLine2: 'motion.',
   heroSub:
     'Coaching, programming, and content — engineered with the discipline of a system, not the noise of a feed.',
   heroCta1: 'Work with me',
@@ -63,7 +63,7 @@ export const about: About = AboutSchema.parse({
   tagline: 'A systems mind, applied to the body.',
   bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
   specs: [
-    { label: 'Based in',        value: 'Toronto · Ontario' },
+    { label: 'Based in',        value: 'Toronto · Canada' },
     { label: 'Focus',           value: 'Strength · Conditioning · Story', note: '03' },
     { label: 'Coaching since',  value: 'Building, one rep at a time', note: '2025' },
     { label: 'Athletes coached',value: '[PLACEHOLDER: figure]', note: '80+' },

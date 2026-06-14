@@ -55,7 +55,7 @@ export default function TrustedBy({ variant }: TrustedByProps) {
             <div className="section-index reveal">
               <span className="dot" aria-hidden="true" />
               <span className="mono mono--sm">
-                {variant === 'home' ? '04 / 04 — Trusted by' : 'Trusted by'}
+                {variant === 'home' ? '04 — Trusted by' : 'Trusted by'}
               </span>
             </div>
             <h2 className="sec-title reveal" id={`trust-title-${variant}`}>

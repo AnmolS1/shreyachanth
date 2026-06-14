@@ -48,7 +48,7 @@ export default function Contact() {
               data-view-heading
               tabIndex={-1}
             >
-              Dial in a{' '}
+              Start a{' '}
               <em
                 style={{
                   fontStyle: 'normal',
@@ -59,7 +59,7 @@ export default function Contact() {
                   backgroundClip: 'text',
                 }}
               >
-                transmission.
+                new journey.
               </em>
             </h1>
             <p className="lead reveal">
@@ -78,11 +78,11 @@ export default function Contact() {
               </div>
               <div className="ro">
                 <span className="k">Based in</span>
-                <span className="v">[PLACEHOLDER: City · Country]</span>
+                <span className="v">Toronta · Canada</span>
               </div>
               <div className="ro">
                 <span className="k">Direct</span>
-                <span className="v">{seo.contactEmail ?? 'hello@placeholder.com'}</span>
+                <span className="v">{seo.contactEmail ?? 'contact@shreyachanth.com'}</span>
               </div>
             </div>
           </div>

@@ -112,8 +112,16 @@ function CursorInner() {
       if (isInteractive !== active) {
         ring.classList.toggle('is-active', isInteractive)
         dot.classList.toggle('is-active', isInteractive)
+        // Re-entering an interactive element resumes the pulse (clear pause)
+        if (isInteractive) ring.classList.remove('is-paused')
         active = isInteractive
       }
+    }
+
+    // Click while over an interactive element: pause the pulse so the ring
+    // settles to a static enlarged size. Pulse resumes on next hover-enter.
+    const onDown = () => {
+      if (active) ring.classList.add('is-paused')
     }
 
     // Smooth-lerp the ring; dot follows instantly (matches prototype feel)
@@ -129,11 +137,13 @@ function CursorInner() {
 
     window.addEventListener('mousemove', onMove, { passive: true })
     document.addEventListener('mouseover', onOver, { passive: true })
+    document.addEventListener('mousedown', onDown, { passive: true })
     rafId = requestAnimationFrame(loop)
 
     return () => {
       window.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseover', onOver)
+      document.removeEventListener('mousedown', onDown)
       cancelAnimationFrame(rafId)
       mo.disconnect()
       document.documentElement.classList.remove('has-custom-cursor')

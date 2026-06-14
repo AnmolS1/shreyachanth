@@ -18,7 +18,7 @@ export default function About() {
       <div className="container">
         <div className="section-index reveal">
           <span className="dot" aria-hidden="true" />
-          <span className="mono mono--sm">01 / 04 — About</span>
+          <span className="mono mono--sm">01 — About</span>
         </div>
 
         <div className="about-grid">

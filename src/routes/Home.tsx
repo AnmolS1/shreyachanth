@@ -56,7 +56,7 @@ export default function Home() {
       <InstagramRail />
 
       {/* 05 – Trusted by */}
-      <TrustedBy variant="home" />
+      {/* <TrustedBy variant="home" /> */}
     </motion.div>
   )
 }
