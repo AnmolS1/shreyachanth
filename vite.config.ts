@@ -35,6 +35,9 @@ export default defineConfig({
 		// Disable modulepreload polyfill — the inline <script> it injects would be
 		// blocked by our strict script-src 'self' CSP. Modern browsers don't need it.
 		modulePreload: { polyfill: false },
+		// Three.js + R3F can't be tree-shaken below 500 kB without removing R3F.
+		// Raise the warning threshold instead of hiding a real problem with a rewrite.
+		chunkSizeWarningLimit: 1100,
 		rollupOptions: {
 			output: {
 				manualChunks: {

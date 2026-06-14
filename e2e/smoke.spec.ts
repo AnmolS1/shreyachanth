@@ -11,7 +11,7 @@
  * (1x00000000000000000000AA) so the widget auto-completes in headless Chromium.
  * We wait for the hidden cf-turnstile-response input to be populated before submitting.
  */
-import { test, expect, Route } from '@playwright/test'
+import { test, expect, Route, type Page } from '@playwright/test'
 
 // ── Route heading assertions ──────────────────────────────────────────────────
 
@@ -61,7 +61,7 @@ test('Nav sets aria-current="page" on active link and routes without reload', as
  * The always-pass test key (1x00000000000000000000AA) resolves automatically;
  * this wait ensures the React `onSuccess` state update has propagated before submit.
  */
-async function waitForTurnstile(page: Parameters<typeof test>[1]['page']) {
+async function waitForTurnstile(page: Page) {
 	await page.waitForFunction(
 		() => {
 			const input = document.querySelector<HTMLInputElement>(

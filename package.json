@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"dev:pages": "npm run build && wrangler pages dev --live-reload",
+		"dev:pages": "vite build && concurrently -k -n build,serve \"vite build --watch\" \"wrangler pages dev --live-reload\"",
 		"typecheck:functions": "tsc -p functions/tsconfig.json --noEmit",
 		"validate": "tsx src/content/validate.ts",
 		"build": "npm run validate && vite build",
@@ -41,6 +41,7 @@
 		"@vitejs/plugin-react": "^4.3.4",
 		"audit-ci": "^7.1.0",
 		"autoprefixer": "^10.4.21",
+		"concurrently": "^9.2.1",
 		"postcss": "^8.5.3",
 		"tailwindcss": "^3.4.17",
 		"tsx": "^4.19.3",
