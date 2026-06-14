@@ -1,29 +1,32 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Favicons & PWA manifest -->
-    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#0B0B0D" />
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Preload critical fonts (reduces FOUT) -->
-    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin />
+	<!-- Favicons & PWA manifest -->
+	<link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+	<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+	<link rel="manifest" href="/manifest.json" />
+	<meta name="theme-color" content="#0B0B0D" />
 
-    <!-- Default title — overridden per-route by react-helmet-async -->
-    <title>Shreya Chanth — Fitness Coach &amp; Content Creator</title>
-    <meta name="description" content="Shreya Chanth — fitness coach and content creator. Portfolio." />
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- No inline scripts. build.modulePreload.polyfill = false in vite.config.ts
+	<!-- Preload critical fonts (reduces FOUT) -->
+	<link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+	<link rel="preload" href="/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin />
+
+	<!-- Default title — overridden per-route by react-helmet-async -->
+	<title>Shreya Chanth — Fitness Coach &amp; Content Creator</title>
+	<meta name="description" content="Shreya Chanth — fitness coach and content creator. Portfolio." />
+</head>
+
+<body>
+	<div id="root"></div>
+	<!-- No inline scripts. build.modulePreload.polyfill = false in vite.config.ts
          ensures Vite doesn't inject an inline polyfill that would violate CSP. -->
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+	<script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

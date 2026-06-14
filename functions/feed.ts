@@ -22,8 +22,8 @@
  */
 
 interface Env {
-  FEED_CACHE: KVNamespace
-  BEHOLD_FEED_ID: string
+	FEED_CACHE: KVNamespace
+	BEHOLD_FEED_ID: string
 }
 
 /**
@@ -34,60 +34,60 @@ interface Env {
  *   - anything else          ← return null → caller returns 502
  */
 function extractPosts(data: unknown): unknown[] | null {
-  if (Array.isArray(data)) return data
-  if (data && typeof data === 'object' && 'posts' in data) {
-    const posts = (data as Record<string, unknown>).posts
-    if (Array.isArray(posts)) return posts
-  }
-  return null
+	if (Array.isArray(data)) return data
+	if (data && typeof data === 'object' && 'posts' in data) {
+		const posts = (data as Record<string, unknown>).posts
+		if (Array.isArray(posts)) return posts
+	}
+	return null
 }
 
 export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
-  // 1. Cache hit — serve from KV.
-  //    The cached value is already a normalised posts array (see step 4 below).
-  //    Apply extractPosts defensively in case an old object-shaped value was
-  //    cached before this fix was deployed — self-heals on next miss.
-  const cached = await env.FEED_CACHE.get('behold', 'json')
-  if (cached) {
-    const posts = extractPosts(cached)
-    if (posts) {
-      return Response.json(posts, {
-        headers: { 'Cache-Control': 'public, max-age=3600' },
-      })
-    }
-    // Stale/unexpected shape in KV — fall through to a fresh fetch and re-cache
-  }
+	// 1. Cache hit — serve from KV.
+	//    The cached value is already a normalised posts array (see step 4 below).
+	//    Apply extractPosts defensively in case an old object-shaped value was
+	//    cached before this fix was deployed — self-heals on next miss.
+	const cached = await env.FEED_CACHE.get('behold', 'json')
+	if (cached) {
+		const posts = extractPosts(cached)
+		if (posts) {
+			return Response.json(posts, {
+				headers: { 'Cache-Control': 'public, max-age=3600' },
+			})
+		}
+		// Stale/unexpected shape in KV — fall through to a fresh fetch and re-cache
+	}
 
-  // 2. Feed ID must be configured
-  if (!env.BEHOLD_FEED_ID) {
-    return new Response('Not configured', { status: 503 })
-  }
+	// 2. Feed ID must be configured
+	if (!env.BEHOLD_FEED_ID) {
+		return new Response('Not configured', { status: 503 })
+	}
 
-  // 3. Fetch from Behold
-  let r: Response
-  try {
-    r = await fetch(`https://feeds.behold.so/${env.BEHOLD_FEED_ID}`)
-  } catch {
-    return new Response('Upstream error', { status: 502 })
-  }
+	// 3. Fetch from Behold
+	let r: Response
+	try {
+		r = await fetch(`https://feeds.behold.so/${env.BEHOLD_FEED_ID}`)
+	} catch {
+		return new Response('Upstream error', { status: 502 })
+	}
 
-  if (!r.ok) {
-    // Do NOT cache a failure — next request will try Behold again
-    return new Response('Upstream error', { status: 502 })
-  }
+	if (!r.ok) {
+		// Do NOT cache a failure — next request will try Behold again
+		return new Response('Upstream error', { status: 502 })
+	}
 
-  const raw = await r.json()
-  const posts = extractPosts(raw)
+	const raw = await r.json()
+	const posts = extractPosts(raw)
 
-  if (!posts || posts.length === 0) {
-    // Unexpected payload shape or empty feed — do not cache
-    return new Response('Upstream returned unexpected data', { status: 502 })
-  }
+	if (!posts || posts.length === 0) {
+		// Unexpected payload shape or empty feed — do not cache
+		return new Response('Upstream returned unexpected data', { status: 502 })
+	}
 
-  // 4. Cache the normalised posts ARRAY for 6 hours
-  await env.FEED_CACHE.put('behold', JSON.stringify(posts), { expirationTtl: 21600 })
+	// 4. Cache the normalised posts ARRAY for 6 hours
+	await env.FEED_CACHE.put('behold', JSON.stringify(posts), { expirationTtl: 21600 })
 
-  return Response.json(posts, {
-    headers: { 'Cache-Control': 'public, max-age=3600' },
-  })
+	return Response.json(posts, {
+		headers: { 'Cache-Control': 'public, max-age=3600' },
+	})
 }
