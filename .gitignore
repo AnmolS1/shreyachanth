@@ -28,4 +28,6 @@ dist/
 # TypeScript
 *.tsbuildinfo
 .wrangler/
-.wrangler/
+
+# R2 upload staging — local only, never commit
+r2-upload/

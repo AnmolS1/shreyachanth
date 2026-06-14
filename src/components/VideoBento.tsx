@@ -117,9 +117,9 @@ function BentoTile({
 			onFocus={handleFocus}
 			onBlur={handleBlur}
 		>
-			{/* Poster + looping video preview */}
+			{/* Poster + looping muted preview video (tile hover) */}
 			<div className="poster">
-				{loaded && (video.mp4 || video.webm) ? (
+				{loaded && (video.previewMp4 || video.previewWebm) ? (
 					<video
 						ref={videoRef}
 						muted
@@ -131,8 +131,8 @@ function BentoTile({
 						tabIndex={-1}
 						style={{ width: '100%', height: '100%', objectFit: 'cover' }}
 					>
-						{video.webm && <source src={video.webm} type="video/webm" />}
-						{video.mp4 && <source src={video.mp4} type="video/mp4" />}
+						{video.previewWebm && <source src={video.previewWebm} type="video/webm" />}
+						{video.previewMp4 && <source src={video.previewMp4} type="video/mp4" />}
 					</video>
 				) : (
 					<img

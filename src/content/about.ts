@@ -61,12 +61,12 @@ export const about: About = AboutSchema.parse({
 
 	// ── Dossier ───────────────────────────────────────────────────────────────
 	tagline: 'A systems mind, applied to the body.',
-	bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+	bio: 'Toronto-based fitness and nutrition coach. I work with people who want to change how they move and eat, and with brands who want that change on camera.',
 	specs: [
 		{ label: 'Based in', value: 'Toronto · Canada' },
 		{ label: 'Focus', value: 'Strength · Conditioning · Story', note: '03' },
 		{ label: 'Coaching since', value: 'Building, one rep at a time', note: '2025' },
-		{ label: 'Athletes coached', value: '[PLACEHOLDER: figure]', note: '80+' },
+		{ label: 'Athletes coached', value: '—', note: '80+' },
 	],
 	stats: [
 		{ value: 1200, unit: '+', label: 'Sessions logged' },

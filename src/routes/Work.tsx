@@ -87,8 +87,8 @@ function SampleTile({
 			onBlur={pause}
 		>
 			<div className="poster">
-				{/* Always render the poster img; swap to looping video preview once loaded */}
-				{loaded && (video.mp4 || video.webm) ? (
+				{/* Always render the poster img; swap to looping muted preview once loaded */}
+				{loaded && (video.previewMp4 || video.previewWebm) ? (
 					<video
 						ref={videoRef}
 						muted
@@ -100,8 +100,8 @@ function SampleTile({
 						tabIndex={-1}
 						style={{ width: '100%', height: '100%', objectFit: 'cover' }}
 					>
-						{video.webm && <source src={video.webm} type="video/webm" />}
-						{video.mp4 && <source src={video.mp4} type="video/mp4" />}
+						{video.previewWebm && <source src={video.previewWebm} type="video/webm" />}
+						{video.previewMp4 && <source src={video.previewMp4} type="video/mp4" />}
 					</video>
 				) : (
 					<img
@@ -151,10 +151,10 @@ export default function Work() {
 		>
 			<Helmet>
 				<title>{title}</title>
-				<meta name="description" content="[PLACEHOLDER: Work with me description]" />
+				<meta name="description" content="Fitness and Nutrition Coaching" />
 				<link rel="canonical" href={`${seo.siteUrl}/work`} />
 				<meta property="og:title" content={title} />
-				<meta property="og:description" content="[PLACEHOLDER: Work page description]" />
+				<meta property="og:description" content="Fitness and Nutrition Coaching" />
 				<meta property="og:image" content={seo.ogImage} />
 				<meta property="og:url" content={`${seo.siteUrl}/work`} />
 				<meta property="og:type" content="website" />
@@ -172,8 +172,7 @@ export default function Work() {
 				</h1>
 				<p className="lead reveal">
 					Coaching, nutrition, and content — each a discipline of its own, each with sample work
-					and a spec-sheet rate card.{' '}
-					<span style={{ color: 'var(--faint)' }}>[Placeholder positioning copy.]</span>
+					and a spec-sheet rate card.
 				</p>
 			</section>
 
@@ -203,8 +202,7 @@ export default function Work() {
 						</div>
 						<h2>Strength, programmed.</h2>
 						<p className="p-desc">
-							[PLACEHOLDER: Fitness pillar description — strength &amp; conditioning, periodised
-							and tracked.]
+							Fitness — strength &amp; conditioning, periodised and tracked.
 						</p>
 					</div>
 					<div className="pillar-body">
@@ -236,8 +234,7 @@ export default function Work() {
 						</div>
 						<h2>Nutrition, as a system.</h2>
 						<p className="p-desc">
-							[PLACEHOLDER: Diet pillar description — habits and intake, engineered to be
-							repeatable.]
+							Diet — habits and intake, engineered to be repeatable.
 						</p>
 					</div>
 					<div className="pillar-body">
@@ -269,8 +266,7 @@ export default function Work() {
 						</div>
 						<h2>Content &amp; brand work.</h2>
 						<p className="p-desc">
-							[PLACEHOLDER: Storytelling pillar description — narrative-led content and brand
-							partnerships.]
+							Storytelling — narrative-led content and brand partnerships.
 						</p>
 					</div>
 					<div className="pillar-body">

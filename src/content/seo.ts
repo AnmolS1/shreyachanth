@@ -18,7 +18,7 @@ export const seo: Seo = SeoSchema.parse({
 	siteUrl: 'https://shreyachanth.com',
 	defaultTitle: 'Shreya Chanth — Fitness Coach & Content Creator',
 	defaultDescription:
-		'[PLACEHOLDER: meta description — 150–160 chars of real positioning copy]',
+		'Toronto-based fitness and nutrition coach. I work with people who want to change how they move and eat, and with brands who want that change on camera.',
 	ogImage: 'https://shreyachanth.com/icons/og-image.jpg',
 	instagramUrl: 'https://instagram.com/shrookya',
 	contactEmail: 'contact@shreyachanth.com',

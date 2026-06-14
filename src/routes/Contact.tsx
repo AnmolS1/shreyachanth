@@ -26,10 +26,10 @@ export default function Contact() {
 		>
 			<Helmet>
 				<title>{title}</title>
-				<meta name="description" content="[PLACEHOLDER: Contact page description]" />
+				<meta name="description" content="Contact Shreya Chanth" />
 				<link rel="canonical" href={`${seo.siteUrl}/contact`} />
 				<meta property="og:title" content={title} />
-				<meta property="og:description" content="[PLACEHOLDER: Contact description]" />
+				<meta property="og:description" content="Contact Shreya Chanth" />
 				<meta property="og:image" content={seo.ogImage} />
 				<meta property="og:url" content={`${seo.siteUrl}/contact`} />
 				<meta property="og:type" content="website" />
@@ -63,8 +63,7 @@ export default function Contact() {
 							</em>
 						</h1>
 						<p className="lead reveal">
-							Tell me what you&apos;re building and where you want it to go.{' '}
-							<span style={{ color: 'var(--faint)' }}>[Placeholder copy.]</span>
+							Tell me what you&apos;re building and where you want it to go.
 						</p>
 
 						<div className="contact-readout reveal">

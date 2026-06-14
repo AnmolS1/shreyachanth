@@ -76,17 +76,7 @@ export default function VideoLightbox({
 
 				{/* Media area — gold-line border, 4px radius */}
 				<div className="lightbox-media" style={{ aspectRatio }}>
-					{video.streamId ? (
-						// Long-form: Cloudflare Stream sandboxed iframe
-						<iframe
-							src={`https://customer-placeholder.cloudflarestream.com/${video.streamId}/iframe`}
-							allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-							sandbox="allow-scripts allow-same-origin"
-							loading="lazy"
-							title={video.title}
-							style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
-						/>
-					) : video.mp4 || video.webm ? (
+					{video.mp4 || video.webm ? (
 						// Short-form: R2 / local video
 						<video
 							ref={videoRef}
