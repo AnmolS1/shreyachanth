@@ -9,22 +9,22 @@ import { motion } from 'framer-motion'
  * The scan sweep is a horizontal hairline that translates X from -60vw to 160vw.
  */
 export default function NotFound() {
-  const { pathname } = useLocation()
-  const requested = pathname.length > 64 ? pathname.slice(0, 61) + '…' : pathname
+	const { pathname } = useLocation()
+	const requested = pathname.length > 64 ? pathname.slice(0, 61) + '…' : pathname
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <Helmet>
-        <title>Page not found — Shreya Chanth</title>
-        <meta name="robots" content="noindex" />
-      </Helmet>
+	return (
+		<motion.div
+			initial={{ opacity: 0, y: 8 }}
+			animate={{ opacity: 1, y: 0 }}
+			exit={{ opacity: 0 }}
+			transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
+		>
+			<Helmet>
+				<title>Page not found — Shreya Chanth</title>
+				<meta name="robots" content="noindex" />
+			</Helmet>
 
-      <style>{`
+			<style>{`
         /* =======================================================================
            404 — "coordinate not found"
            An instrument that can't lock a location. The 0 of 404 becomes a
@@ -275,72 +275,72 @@ export default function NotFound() {
         }
       `}</style>
 
-      <section className="nf" aria-labelledby="nf-title">
-        <div className="nf-scan" aria-hidden="true" />
+			<section className="nf" aria-labelledby="nf-title">
+				<div className="nf-scan" aria-hidden="true" />
 
-        <div className="container">
-          {/* eyebrow: tick + mono label */}
-          <div className="nf-eyebrow">
-            <span className="tick" aria-hidden="true" />
-            <span className="mono mono--sm">Error 404 · signal lost</span>
-          </div>
+				<div className="container">
+					{/* eyebrow: tick + mono label */}
+					<div className="nf-eyebrow">
+						<span className="tick" aria-hidden="true" />
+						<span className="mono mono--sm">Error 404 · signal lost</span>
+					</div>
 
-          {/* 4 · reticle · 4 */}
-          <div className="nf-code" role="img" aria-label="404">
-            <span className="d" aria-hidden="true">4</span>
-            <span className="nf-ret" aria-hidden="true">
-              <span className="ring" />
-              <span className="ring r2" />
-              <span className="ring spin" />
-              <span className="cross-h" />
-              <span className="cross-v" />
-              <span className="tk tl" /><span className="tk tr" />
-              <span className="tk bl" /><span className="tk br" />
-              <span className="pip" />
-            </span>
-            <span className="d" aria-hidden="true">4</span>
-          </div>
+					{/* 4 · reticle · 4 */}
+					<div className="nf-code" role="img" aria-label="404">
+						<span className="d" aria-hidden="true">4</span>
+						<span className="nf-ret" aria-hidden="true">
+							<span className="ring" />
+							<span className="ring r2" />
+							<span className="ring spin" />
+							<span className="cross-h" />
+							<span className="cross-v" />
+							<span className="tk tl" /><span className="tk tr" />
+							<span className="tk bl" /><span className="tk br" />
+							<span className="pip" />
+						</span>
+						<span className="d" aria-hidden="true">4</span>
+					</div>
 
-          <h1
-            className="nf-lead"
-            id="nf-title"
-            data-view-heading
-            tabIndex={-1}
-          >
-            This coordinate isn&apos;t <em>on the grid.</em>
-          </h1>
+					<h1
+						className="nf-lead"
+						id="nf-title"
+						data-view-heading
+						tabIndex={-1}
+					>
+						This coordinate isn&apos;t <em>on the grid.</em>
+					</h1>
 
-          <p className="nf-sub">
-            The page you&apos;re after has moved, retired, or never existed. The instrument keeps
-            scanning — but you&apos;ll get there faster from a known route below.
-          </p>
+					<p className="nf-sub">
+						The page you&apos;re after has moved, retired, or never existed. The instrument keeps
+						scanning — but you&apos;ll get there faster from a known route below.
+					</p>
 
-          {/* diagnostic readout */}
-          <div className="nf-readout">
-            <div className="ro">
-              <span className="k">Requested</span>
-              <span className="v bad">{requested}</span>
-            </div>
-            <div className="ro">
-              <span className="k">Status</span>
-              <span className="v">404 · not found</span>
-            </div>
-            <div className="ro">
-              <span className="k">Nearest route</span>
-              <span className="v">/ · home</span>
-            </div>
-          </div>
+					{/* diagnostic readout */}
+					<div className="nf-readout">
+						<div className="ro">
+							<span className="k">Requested</span>
+							<span className="v bad">{requested}</span>
+						</div>
+						<div className="ro">
+							<span className="k">Status</span>
+							<span className="v">404 · not found</span>
+						</div>
+						<div className="ro">
+							<span className="k">Nearest route</span>
+							<span className="v">/ · home</span>
+						</div>
+					</div>
 
-          <div className="nf-actions">
-            <Link to="/" className="btn btn--gold">
-              Return home <span className="arr">→</span>
-            </Link>
-            <Link to="/work" className="btn btn--ghost">
-              Work with me
-            </Link>
-          </div>
-        </div>
-      </section>
-    </motion.div>
-  )
+					<div className="nf-actions">
+						<Link to="/" className="btn btn--gold">
+							Return home <span className="arr">→</span>
+						</Link>
+						<Link to="/work" className="btn btn--ghost">
+							Work with me
+						</Link>
+					</div>
+				</div>
+			</section>
+		</motion.div>
+	)
 }

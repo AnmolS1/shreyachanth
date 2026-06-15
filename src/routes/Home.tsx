@@ -13,50 +13,50 @@ import InstagramRail from '../components/InstagramRail'
 import TrustedBy from '../components/TrustedBy'
 
 const pageVariants = {
-  initial: { opacity: 0, y: 8 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0 },
+	initial: { opacity: 0, y: 8 },
+	animate: { opacity: 1, y: 0 },
+	exit: { opacity: 0 },
 }
 
 export default function Home() {
-  const heroRef = useRef<HTMLElement>(null!)
-  const lenisRef = useLenis()
-  useHeroPin(heroRef, lenisRef)
+	const heroRef = useRef<HTMLElement>(null!)
+	const lenisRef = useLenis()
+	useHeroPin(heroRef, lenisRef)
 
-  return (
-    <motion.div
-      variants={pageVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <Helmet>
-        <title>{seo.defaultTitle}</title>
-        <meta name="description" content={seo.defaultDescription} />
-        <link rel="canonical" href={seo.siteUrl} />
-        <meta property="og:title" content={seo.siteName} />
-        <meta property="og:description" content={seo.defaultDescription} />
-        <meta property="og:image" content={seo.ogImage} />
-        <meta property="og:url" content={seo.siteUrl} />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Helmet>
+	return (
+		<motion.div
+			variants={pageVariants}
+			initial="initial"
+			animate="animate"
+			exit="exit"
+			transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
+		>
+			<Helmet>
+				<title>{seo.defaultTitle}</title>
+				<meta name="description" content={seo.defaultDescription} />
+				<link rel="canonical" href={seo.siteUrl} />
+				<meta property="og:title" content={seo.siteName} />
+				<meta property="og:description" content={seo.defaultDescription} />
+				<meta property="og:image" content={seo.ogImage} />
+				<meta property="og:url" content={seo.siteUrl} />
+				<meta property="og:type" content="website" />
+				<meta name="twitter:card" content="summary_large_image" />
+			</Helmet>
 
-      {/* 01 – Hero (three.js particle field + headline + stats) */}
-      <Hero ref={heroRef} />
+			{/* 01 – Hero (three.js particle field + headline + stats) */}
+			<Hero ref={heroRef} />
 
-      {/* 02 – About dossier */}
-      <About />
+			{/* 02 – About dossier */}
+			<About />
 
-      {/* 03 – Video bento grid */}
-      <VideoBento />
+			{/* 03 – Video bento grid */}
+			<VideoBento />
 
-      {/* 04 – Instagram rail */}
-      <InstagramRail />
+			{/* 04 – Instagram rail */}
+			<InstagramRail />
 
-      {/* 05 – Trusted by */}
-      <TrustedBy variant="home" />
-    </motion.div>
-  )
+			{/* 05 – Trusted by */}
+			{/* <TrustedBy variant="home" /> */}
+		</motion.div>
+	)
 }

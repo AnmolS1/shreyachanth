@@ -22,12 +22,12 @@ encode() {
 
   echo "▸ ${ID}: MP4..."
   ffmpeg -y -i "$SRC" -t 8 -vf "scale=${SCALE},format=yuv420p" \
-    -c:v libx264 -preset fast -crf 26 -an -movflags +faststart "$MP4" 2>/dev/null \
+    -c:v libx264 -preset fast -crf 26 -c:a aac -b:a 128k -movflags +faststart "$MP4" 2>/dev/null \
     && echo "  ✓ MP4 $(du -sh "$MP4" | cut -f1)" || echo "  ✗ MP4 failed"
 
   echo "▸ ${ID}: WebM..."
   ffmpeg -y -i "$SRC" -t 8 -vf "scale=${SCALE}" \
-    -c:v libvpx-vp9 -crf 36 -b:v 0 -deadline good -cpu-used 4 -an "$WEBM" 2>/dev/null \
+    -c:v libvpx-vp9 -crf 36 -b:v 0 -deadline good -cpu-used 4 -c:a libopus -b:a 128k "$WEBM" 2>/dev/null \
     && echo "  ✓ WebM $(du -sh "$WEBM" | cut -f1)" || echo "  ✗ WebM failed"
 
   echo "▸ ${ID}: poster..."
@@ -35,7 +35,7 @@ encode() {
     && echo "  ✓ poster $(du -sh "$POSTER" | cut -f1)" || echo "  ✗ poster failed"
 }
 
-echo "=== Transcoding 16 reels ==="
+echo "=== Transcoding 15 reels ==="
 
 # Landscape (1920x1080) → scale 640w
 encode "reel-01" "videos/copy_3A8B6470-0503-4512-B80A-8CB3D55B9F33.MOV" "640:-2"
@@ -52,8 +52,6 @@ encode "reel-09" "videos/v15044gf0000d6eesl7og65unriceot0.mov" "360:-2"
 encode "reel-11" "videos/v15044gf0000d6gebo7og65h2q8825g0.mov" "360:-2"
 encode "reel-14" "videos/v15044gf0000d6k7chvog65sec4rno3g.mov" "360:-2"
 encode "reel-15" "videos/v15044gf0000d6n5lpvog65sec0a35ig.mov" "360:-2"
-encode "reel-16" "videos/v15044gf0000d7k4tmfog65nannk05kg.mov" "360:-2"
-
 # Portrait 536x960 → scale 360w
 encode "reel-12" "videos/v15044gf0000d6igrunog65r9agujk60.mov" "360:-2"
 

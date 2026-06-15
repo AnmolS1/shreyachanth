@@ -1,15 +1,21 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "types": ["@cloudflare/workers-types"],
-    "strict": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "isolatedModules": true,
-    "esModuleInterop": true
-  },
-  "include": ["**/*.ts"]
+	"compilerOptions": {
+		"target": "ES2022",
+		"lib": [
+			"ES2022"
+		],
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"types": [
+			"@cloudflare/workers-types"
+		],
+		"strict": true,
+		"skipLibCheck": true,
+		"noEmit": true,
+		"isolatedModules": true,
+		"esModuleInterop": true
+	},
+	"include": [
+		"**/*.ts"
+	]
 }
