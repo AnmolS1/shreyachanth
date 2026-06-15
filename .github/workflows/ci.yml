@@ -19,7 +19,7 @@ jobs:
         run: npm ci
 
       - name: Audit for moderate+ advisories
-        run: npx audit-ci --moderate
+        run: npx audit-ci --config audit-ci.json
 
       - name: Validate content schemas
         run: npm run validate

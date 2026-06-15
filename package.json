@@ -30,6 +30,9 @@
 		"three": "^0.166.0",
 		"zod": "^3.24.2"
 	},
+	"overrides": {
+		"shell-quote": "^1.8.4"
+	},
 	"devDependencies": {
 		"@axe-core/react": "^4.10.2",
 		"@cloudflare/workers-types": "^4.20250525.0",
