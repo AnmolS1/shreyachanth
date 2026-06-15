@@ -12,7 +12,7 @@ export default function RateCard({ card }: { card: RateCard }) {
 			{/* Header */}
 			<div className="ratecard-head">
 				<span className="rc-title">{card.title}</span>
-				<span className="rc-tag">[ placeholder pricing ]</span>
+				<span className="rc-tag">[ Per-Request Pricing ]</span>
 			</div>
 
 			{/* Line items */}

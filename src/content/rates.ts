@@ -4,7 +4,7 @@ export const RateLineSchema = z.object({
 	name: z.string(),
 	/** e.g. "Monthly retainer", "Per session" */
 	unit: z.string(),
-	/** e.g. "$0,000" or "On request" */
+	/** e.g. "$0,000" or "–" */
 	price: z.string(),
 	/** Optional per-frequency suffix e.g. "/mo" */
 	priceSuffix: z.string().optional(),
@@ -35,27 +35,27 @@ export const rates: Rates = RatesSchema.parse({
 				{
 					name: '1:1 coaching',
 					unit: 'Monthly retainer',
-					price: '$0,000',
+					price: '–',
 					priceSuffix: '/mo',
 					description:
-						'Custom programming, weekly check-ins, form review. [PLACEHOLDER: line item]',
+						'Custom programming, weekly check-ins, form review.',
 				},
 				{
 					name: '12-week build',
 					unit: 'One-off program',
-					price: '$0,000',
+					price: '–',
 					description:
-						'A full periodised block, delivered and tracked. [PLACEHOLDER: line item]',
+						'A full periodised block, delivered and tracked.',
 				},
 				{
 					name: 'Single session',
 					unit: 'Per session',
-					price: '$000',
+					price: '–',
 					description:
-						'One focused 60-minute working session. [PLACEHOLDER: line item]',
+						'One focused 60-minute working session.',
 				},
 			],
-			footNote: 'Custom scopes on request',
+			footNote: 'Custom scopes –',
 		},
 		{
 			pillar: 'diet',
@@ -64,27 +64,27 @@ export const rates: Rates = RatesSchema.parse({
 				{
 					name: 'Nutrition system',
 					unit: 'One-off build',
-					price: '$0,000',
+					price: '–',
 					description:
-						'Intake plan, targets, and a habit framework. [PLACEHOLDER: line item]',
+						'Intake plan, targets, and a habit framework.',
 				},
 				{
 					name: 'Monthly guidance',
 					unit: 'Ongoing',
-					price: '$000',
+					price: '–',
 					priceSuffix: '/mo',
 					description:
-						'Adjustments, accountability, and check-ins. [PLACEHOLDER: line item]',
+						'Adjustments, accountability, and check-ins.',
 				},
 				{
 					name: 'Consult',
 					unit: '60 minutes',
-					price: '$000',
+					price: '–',
 					description:
-						'A single strategy call to map the approach. [PLACEHOLDER: line item]',
+						'A single strategy call to map the approach.',
 				},
 			],
-			footNote: 'Bundled with coaching on request',
+			footNote: 'Bundled with coaching –',
 		},
 		{
 			pillar: 'storytelling',
@@ -93,26 +93,26 @@ export const rates: Rates = RatesSchema.parse({
 				{
 					name: 'Single reel',
 					unit: 'Per piece',
-					price: '$000',
+					price: '–',
 					description:
-						'Concept, shoot direction, edit. [PLACEHOLDER: line item]',
+						'Concept, shoot direction, edit.',
 				},
 				{
 					name: 'Content pack',
 					unit: '×6 reels',
-					price: '$0,000',
+					price: '–',
 					description:
-						'A batched set with a consistent through-line. [PLACEHOLDER: line item]',
+						'A batched set with a consistent through-line.',
 				},
 				{
 					name: 'Brand partnership',
 					unit: 'Scoped',
-					price: 'On request',
+					price: '–',
 					description:
-						'Integrated campaigns and ongoing collaborations. [PLACEHOLDER: line item]',
+						'Integrated campaigns and ongoing collaborations.',
 				},
 			],
-			footNote: 'Media kit available on request',
+			footNote: 'Media kit available –',
 		},
 	],
 })
