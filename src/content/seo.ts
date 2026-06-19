@@ -16,7 +16,7 @@ export type Seo = z.infer<typeof SeoSchema>
 export const seo: Seo = SeoSchema.parse({
 	siteName: 'Shreya Chanth',
 	siteUrl: 'https://shreyachanth.com',
-	defaultTitle: 'Shreya Chanth — Fitness Coach & Content Creator',
+	defaultTitle: 'Shreya Chanth — Fitness Coach',
 	defaultDescription:
 		'Toronto-based fitness and nutrition coach. I work with people who want to change how they move and eat, and with brands who want that change on camera.',
 	ogImage: 'https://shreyachanth.com/icons/og-image.jpg',
