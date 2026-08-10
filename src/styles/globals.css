@@ -828,6 +828,91 @@ html.has-custom-cursor .cursor-dot {
 	}
 }
 
+/* Nav is only mounted below the breakpoint; this guards a stray render above
+   it. MUST precede the media query — media queries add no specificity, so a
+   later equal-specificity rule would win and hide the controls everywhere. */
+.bento-nav {
+	display: none;
+}
+
+/* ── Bento -> one-at-a-time carousel (<=760px) ───────────────────────────────
+   Keep this breakpoint in sync with CAROUSEL_QUERY in VideoBento.tsx.
+   CSS owns the layout switch; JS only mounts the controls and decides what
+   plays. Same scroll-snap approach as .ig-rail, so swipe and momentum come
+   for free and the track still works if JS fails.                          */
+@media (max-width: 760px) {
+	.bento {
+		display: flex;
+		/* explicit, NOT the default `stretch`: stretch would give each slide a
+		   definite cross size and override its aspect-ratio */
+		align-items: center;
+		grid-template-columns: none;
+		grid-auto-rows: auto;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x mandatory;
+		/* offsetLeft is read against this element in goTo() */
+		position: relative;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.bento::-webkit-scrollbar {
+		display: none;
+	}
+
+	.bento .tile {
+		/* neutralise the desktop span helpers (.v/.v-tall/.sq/.wide/.big) */
+		grid-row: auto;
+		grid-column: auto;
+		flex: 0 0 100%;
+		scroll-snap-align: start;
+		/* Uniform frame for every slide: 13 of the 15 clips are natively 9:16, so
+		   this fits the set and keeps the track a constant height. The two 16:9
+		   clips (reel-01, reel-05) lose their side edges to object-fit: cover —
+		   the same trade the desktop grid already makes on its sq/wide/big cells.
+		   Per-slide native ratios were tried first and left the wide clips
+		   floating in ~425px of dead space. */
+		aspect-ratio: 9 / 16;
+	}
+
+	/* hover affordances are meaningless on touch */
+	.bento .tile .play,
+	.bento .tile .scrub {
+		display: none;
+	}
+
+	.bento-nav {
+		display: flex;
+		justify-content: center;
+		gap: 14px;
+		margin-top: 22px;
+	}
+
+	.bnav {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		/* >=44px: comfortable touch target, unlike an inline text control */
+		width: 46px;
+		height: 46px;
+		border-radius: 50%;
+		border: var(--hairline-w) solid var(--hairline);
+		background: var(--surface);
+		color: var(--text);
+		font-size: 1rem;
+		cursor: pointer;
+		transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+	}
+
+	.bnav:hover,
+	.bnav:focus-visible {
+		border-color: var(--gold-line);
+		color: var(--gold);
+	}
+}
+
+
 .tile {
 	position: relative;
 	overflow: hidden;
