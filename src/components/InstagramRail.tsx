@@ -2,7 +2,9 @@
  * InstagramRail — section 03/04 on Home route.
  * Fetches /feed (Behold proxy), falls back to curatedPosts on any error or empty response.
  *
- * HTML structure mirrors prototype/index.html lines ~310–373 exactly.
+ * HTML structure mirrors prototype/index.html lines ~310–373, except for the
+ * ig-head: the prototype still has the separate right-aligned "@handle ↗" ghost
+ * button that this component folded into the section index as a linked glyph.
  */
 import { useEffect, useRef, useState } from 'react'
 import { instagram } from '../content/instagram'
@@ -64,6 +66,9 @@ function mapBeholdPost(post: BeholdPost): IgPost {
 	}
 }
 
+/** Profile URL derived from the single-sourced handle in content/instagram.ts */
+const profileUrl = `https://instagram.com/${instagram.instagramHandle.replace('@', '')}`
+
 export default function InstagramRail() {
 	const sectionRef = useRef<HTMLElement>(null)
 	useReveal(sectionRef)
@@ -110,25 +115,54 @@ export default function InstagramRail() {
 			aria-labelledby="ig-title"
 		>
 			<div className="container">
-				{/* ig-head: section-index + heading on left, IG handle link on right */}
+				{/* ig-head: section-index (with the linked @handle) + heading */}
 				<div className="ig-head">
 					<div>
 						<div className="section-index reveal">
 							<span className="dot" aria-hidden="true" />
-							<span className="mono mono--sm">03 — Instagram</span>
+							<span className="mono mono--sm ig-index-label">
+								<span>03 —</span>
+								<a
+									className="ig-handle"
+									href={profileUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`Instagram profile: ${instagram.instagramHandle}`}
+								>
+									<svg
+										className="ig-glyph"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+										focusable="false"
+									>
+										<rect
+											x="2.75"
+											y="2.75"
+											width="18.5"
+											height="18.5"
+											rx="5.25"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="2"
+										/>
+										<circle
+											cx="12"
+											cy="12"
+											r="4.25"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="2"
+										/>
+										<circle cx="17.6" cy="6.4" r="1.4" fill="currentColor" />
+									</svg>
+									{instagram.instagramHandle}
+								</a>
+							</span>
 						</div>
 						<h2 className="sec-title reveal" id="ig-title">
 							From the feed.
 						</h2>
 					</div>
-					<a
-						className="btn btn--ghost reveal"
-						href={`https://instagram.com/${instagram.instagramHandle.replace('@', '')}`}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{instagram.instagramHandle} <span className="arr">↗</span>
-					</a>
 				</div>
 			</div>
 
@@ -182,9 +216,9 @@ export default function InstagramRail() {
 									<span className="glyph">View on IG ↗</span>
 								</div>
 								{/* Meta tag */}
-								<div className="ig-meta">
+								{/* <div className="ig-meta">
 									<span className="ig-tag">post {String(i + 1).padStart(2, '0')}</span>
-								</div>
+								</div> */}
 							</a>
 						))}
 					</div>

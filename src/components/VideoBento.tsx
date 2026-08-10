@@ -145,7 +145,7 @@ function BentoTile({
 				)}
 			</div>
 
-			<span className="mono mono--sm tlabel">{video.title}</span>
+			{/* <span className="mono mono--sm tlabel">{video.title}</span> */}
 			{video.duration && <span className="dur">{video.duration}</span>}
 			<span className="play" aria-hidden="true">
 				<span className="tri" />

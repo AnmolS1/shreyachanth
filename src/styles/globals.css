@@ -1043,6 +1043,47 @@ html.has-custom-cursor .cursor-dot {
 	flex-wrap: wrap;
 }
 
+/* "03 — @shrookya" section index.
+   One flex row so the "03 —" prefix and the handle link are centred against
+   each other as sibling items. Necessary because .ig-handle is an inline-flex
+   whose baseline is inherited from its first item — the <svg>, a replaced box
+   whose baseline is its BOTTOM edge. Left in the text flow the browser aligns
+   the glyph's bottom to the prefix's baseline, lifting the handle ~2.7px.
+   vertical-align cannot correct it: it has no effect on flex items. */
+.ig-index-label {
+	display: inline-flex;
+	align-items: center;
+	/* 0.6em + the 0.16em letter-spacing already trailing the dash reproduces the
+	   8.27px space advance in the sibling labels ("01 — About", "02 — Reel index") */
+	gap: 0.6em;
+}
+
+.ig-handle {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: var(--muted);
+	transition: color var(--dur-fast) var(--ease);
+}
+
+/* see the a:visited note at the top of this file — var() is ignored in
+   :visited, and bare a:visited (0,1,1) would otherwise repaint this white. */
+.ig-handle:visited {
+	color: #9A9AA2;
+}
+
+.ig-handle:hover,
+.ig-handle:focus-visible {
+	color: var(--gold);
+}
+
+/* em-sized so the glyph tracks --fs-mono-sm if that token is ever retuned */
+.ig-glyph {
+	width: 1.15em;
+	height: 1.15em;
+	flex-shrink: 0;
+}
+
 .ig-rail {
 	display: grid;
 	grid-auto-flow: column;
