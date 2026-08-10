@@ -184,7 +184,7 @@ export default function ContactForm() {
 				{/* ── Email ───────────────────────────────────────────────── */}
 				<div className="tfield">
 					<label className="key" htmlFor={emailId}>
-						Return address
+						Email
 					</label>
 					<div className="inwrap">
 						<span className="pr" aria-hidden="true">
@@ -215,7 +215,7 @@ export default function ContactForm() {
 				{/* ── Message ─────────────────────────────────────────────── */}
 				<div className="tfield">
 					<label className="key" htmlFor={msgId}>
-						Payload
+						Message
 					</label>
 					<div className="inwrap">
 						<span className="pr" aria-hidden="true">
@@ -281,7 +281,7 @@ export default function ContactForm() {
 					{status === 'success' && (
 						<div className="terminal-log">
 							<div>
-								<span className="muted">›</span> payload queued…{' '}
+								<span className="muted">›</span> message queued…{' '}
 								<span style={{ color: 'var(--gold)' }}>ok</span>
 							</div>
 							<div>

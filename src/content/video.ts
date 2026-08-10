@@ -59,6 +59,13 @@ export type VideoItem = z.infer<typeof VideoItemSchema>
  * Variant layout (15 tiles):
  * big  v    v    sq   wide  v    v-tall  sq
  * v    wide v    sq   v-tall v   wide    v
+ *
+ * NB: `variant` is desktop grid geometry, NOT the media's shape. Measured from
+ * public/posters/: 13 of 15 are 360x640 (9:16) and only reel-01 and reel-05 are
+ * 640x360 (16:9) — so sq/wide/big tiles are vertical footage cropped by
+ * object-fit to tessellate the grid. The <=760px carousel frames every slide at
+ * a uniform 9:16 for the same reason, which crops those two wide clips.
+ * (reel-12's poster is 360x644, 0.6% off 9:16 — a sub-pixel sliver.)
  */
 export const videos: VideoItem[] = VideoItemSchema.array().parse([
 	// Row 1

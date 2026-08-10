@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
+		"dev:host": "vite --host",
 		"dev:pages": "vite build && concurrently -k -n build,serve \"vite build --watch\" \"wrangler pages dev --live-reload\"",
 		"typecheck:functions": "tsc -p functions/tsconfig.json --noEmit",
 		"validate": "tsx src/content/validate.ts",

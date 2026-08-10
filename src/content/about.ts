@@ -55,7 +55,7 @@ export const about: About = AboutSchema.parse({
 	heroLine1: 'Already in',
 	heroLine2: 'motion.',
 	heroSub:
-		'Binge eaters! Lose 10 pounds in your first month!',
+		'Lose 10 lbs in your first month with me!',
 	heroCta1: 'Work with me',
 	heroCta2: 'Get in touch',
 
