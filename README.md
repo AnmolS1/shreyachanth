@@ -11,7 +11,14 @@ Personal portfolio site for Shreya Chanth, fitness coach and content creator. Bu
 ```bash
 npm install
 npm run dev        # starts at http://localhost:5173
+npm run dev:host   # same, but also reachable on your LAN — for testing on a phone
 ```
+
+`dev:host` prints a `Network:` URL (e.g. `http://192.168.x.x:5173/`) that any device
+on the same Wi-Fi can open, with hot reload intact. Use it to check the mobile
+layouts on real hardware. macOS may ask you to allow incoming connections for node
+the first time. Note that iOS Low Power Mode blocks video autoplay outright, so
+static poster frames on the reel carousel are the OS, not a bug.
 
 Copy `.env.example` to `.env` and fill in your keys before running locally:
 
@@ -76,7 +83,7 @@ Every time you push a branch and open a Pull Request, Cloudflare automatically b
 | `src/content/logos.ts` | Brand deal / "Trusted by" logos — names, URLs, logo file paths |
 | `src/content/rates.ts` | Rate cards — service names, pricing, descriptions, footnotes |
 | `src/content/seo.ts` | Page titles, meta descriptions, Open Graph copy, footer tagline |
-| `src/content/video.ts` | Video file URLs, titles, durations, aspect ratio variants |
+| `src/content/video.ts` | Video file URLs, titles, durations, bento tile shapes |
 
 If a content file has a formatting error (for example, a missing comma or a field left blank that is required), the Cloudflare preview build will fail with a clear error message pointing at exactly which field caused the problem. Fix the issue in a new commit on the same branch and push again.
 
@@ -118,15 +125,30 @@ Never put `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, or `BEHOLD_FEED_ID` in a fil
      id: 'reel-17',
      title: 'Your descriptive title here',
      duration: '0:12',
-     variant: 'v',               // tile shape: v, v-tall, sq, wide, big
+     variant: 'v',               // desktop tile shape: v, v-tall, sq, wide, big
      mp4:    `${MEDIA_BASE}/videos/reel-17.mp4`,
      webm:   `${MEDIA_BASE}/videos/reel-17.webm`,
      poster: `${MEDIA_BASE}/posters/reel-17.webp`,
      pillar: 'fitness',           // fitness | diet | storytelling | bento
    },
    ```
-4. Upload the new files to R2 (see `DEPLOY-RUNBOOK.md` Step 4 for upload instructions)
+4. Upload the new files to the `shreyamedia` R2 bucket (the `ASSETS_BUCKET` binding in
+   `wrangler.toml`), served from `https://media.shreyachanth.com`:
+   ```bash
+   wrangler r2 object put shreyamedia/videos/full/reel-17.mp4 --file=path/to/reel-17.mp4 --remote
+   ```
+   `r2-upload/` is a gitignored local staging folder mirroring the bucket's layout.
+   **`--remote` is required** — without it wrangler writes to the local emulator and
+   silently appears to succeed.
 5. Commit `src/content/video.ts` and open a PR as normal
+
+> **`variant` is layout, not aspect ratio.** It sets how many grid rows and columns
+> the tile spans in the desktop bento — it does not describe the video's shape. The
+> `sq`, `wide`, and `big` cells crop vertical footage via `object-fit: cover` to make
+> the grid tessellate, which is the intended look. Below 760px the bento becomes a
+> one-video-at-a-time carousel that frames every clip at a uniform 9:16, so `variant`
+> has no effect on phones. Thirteen of the fifteen current clips are natively 9:16;
+> only `reel-01` and `reel-05` are 16:9, and those two lose their side edges on mobile.
 
 ---
 
